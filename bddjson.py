@@ -7,6 +7,7 @@ SERVER_DIR_PATH = "/home/pi/www/flask/"
 IFEEDB_DIR_PATH = "/home/pi/iFeedBird"
 
 # -----------------------------------------------------------------------------
+# from : ecoReleve-Server/ecorelevesensor/utils/eval.py
 
 
 class Eval:
@@ -53,15 +54,18 @@ class BddJson (Eval):
         # recupere le path de la photo, puis supprimer
         photo_name = 
         photo_path = PHOTOS_DIR_PATH + photo_name
-        os.system("rm %s" % jpg_path)
+        try:
+            os.system("rm %s" % jpg_path)
+            print("[--- Photo " + photo_name + " correctement supprimee ---]")
+        except Exception, e:
+            raise e
+        
 
         # faire la liste moins l'element a delete
         result = list(filter(lambda x : self.eval(getattr(x, attr), operator, value), self.listObj))
         
         # faire le save avec la nouvelle liste
         save()
-
-        return self.listObj
 
     def save(self):
         dictTo_dump = {'photos': []}

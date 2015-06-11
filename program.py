@@ -6,7 +6,7 @@
 #                             www.natural-solutions.eu
 # Programme                 : program.py
 # Version                   : 0.2
-# Derniere modification     : 09-06-2015
+# Derniere modification     : 11-06-2015
 # Version Python            : 2.7
 # Version lib GPIO          : 0.5.11
 #
@@ -42,8 +42,7 @@ SUNRISE_WIN = 9
 SUNRISE_SUM = 7
 TIME_STOP_PREVIEW = 5
 PROJECT_PATH = "/home/pi/iFeedBird/"
-PHOTOS_DIRECTORY = "static/photos/"
-PHOTOS_DIRECTORY2 = "/home/pi/iFeedBird/flask/static/photos/"
+PHOTOS_DIRECTORY = "/home/pi/iFeedBird/flask/static/photos/"
 JSON_FILE = "/home/pi/iFeedBird/flask/static/db.json"
 
 # parametres email
@@ -67,7 +66,6 @@ def saveJson(fname, heure_capture):
             heure_capture = strftime("%d %m %Y %H:%M:%S")
             # startCaptureString = str(startCapture)
             to_add = {
-                    # 'Lien': PROJECT_PATH + 'photos/' + str(fname),
                     'Lien': PHOTOS_DIRECTORY + str(fname),
                     'Heure': heure_capture,
                     'Nom': fname
@@ -115,17 +113,16 @@ def capture(camera):
     fname = (heure_capture + '.jpg')
     print(fname)
     camera.capture(fname)
-    print(fname)
     print("[--- CAPTURED ---]")
     time.sleep(1)
     moveFileThread = threading.Thread(target=move())
     moveFileThread.start()
     time.sleep(1)
-    print("Fichier deplace")
+    print("[--- Fichier deplace ---]")
     updateJSONThread = threading.Thread(target=saveJson(fname, heure_capture))
     updateJSONThread.start()
     time.sleep(1)
-    print("Info sauvegardees")
+    print("[--- Info sauvegardees ---]")
     '''send_email(fname)
     print("Email envoye")
     time.sleep(10)'''
