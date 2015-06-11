@@ -1,0 +1,22 @@
+/*!
+ *
+ * Copyright 2015 Natural Solutions, www.natural-solutions.eu
+ */
+
+/*img {
+height: 100%;
+width: 100%;
+}*/
+
+.row{
+    height: auto;
+    width: auto;
+}
+
+.images{
+    width: 100%;
+}
+
+.portfolio-item img {
+    width: 100%;
+}

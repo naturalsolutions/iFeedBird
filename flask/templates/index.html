@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>iFeedBird - Accueil - Visionneuse photos</title>
+
+    <!-- Bootstrap Core CSS -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <!-- Custom CSS -->
+    <!-- <link href="css/4-col-portfolio.css" rel="stylesheet"> -->
+    <link href="{{ url_for('static', filename='css/4-col-portfolio.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index">Accueil</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="apropos">A propos</a>
+                    </li>
+                    <li>
+                        <a href="contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">iFeedBird
+                    <small>Visionneuse de photos</small>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Projects Row -->
+        <div id="container">
+            <div id="view_principale"></div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Pagination -->
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                    <li>
+                        <a href="#">&laquo;</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">1</a>
+                    </li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <a href="#">4</a>
+                    </li>
+                    <li>
+                        <a href="#">5</a>
+                    </li>
+                    <li>
+                        <a href="#">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; <a href="http://natural-solutions.eu">natural-solutions.eu</a></p>
+                    <p>
+                        <img src="../static/images/resized.png" alt="">
+                    </p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+</body>
+
+    <!-- jQuery -->
+    <script src="../static/libs/vendors/jquery.js"></script><!--V 1.10.2-->
+    <script src="../static/libs/vendors/underscore.js"></script><!--V 1.5.2 -->
+    <script src="../static/libs/vendors/backbone.js"></script><!--V 1.1.0 -->
+    <script src="../static/js/bootstrap.min.js"></script>
+    <link href="{{ url_for('static', filename='../static/js/bootstrap.min.js') }}" rel="javascript" type="text/javascript" />
+
+    <script type="text/template" id="templateView">
+        <div class="col-md-3 col-sm-4 portfolio-item">
+            <div class="images">
+                <p>
+                <h5>Date et heure de capture de la photo : <%= Heure %></h5>
+                </p>
+                <a href="<%= Lien %>"><img class="resize-image" src="<%= Lien %>" alt="Photo"/></a>
+                <hr>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="templateViewPrincipale">
+        <div class="row">
+                <h3>Liste des photos présentes dans le fichier JSON</h3>
+        </div>
+    </script>
+
+    <script>
+    /*--- Modele -------------------------------------------*/
+    	window.Photo = Backbone.Model.extend({
+    		defaults: {
+    			titre: 'Photo',
+    			heure: 'Inconnue',
+                chemin: '/home/pi/iFeedBird/flask/static/photos/'
+    	},
+    	initialize: function(options) {
+    		console.log("Création d'un modele photo");
+    		//this.set("publicationDate", new Date());
+    		}
+    	});
+
+        /*--- Collection ---------------------------------------*/
+        window.Photos = Backbone.Collection.extend({
+            model: window.Photo,
+            url: '/photos',
+
+            initialize: function() {
+                console.log("Création d'une collection photo")
+            }
+        });
+
+        /*--- VIEW ---------------------------------------------*/
+
+        //---------------------1
+        window.ListImageView = Backbone.View.extend({
+            tagName: 'ul',
+            el: '#view_principale',
+            template: _.template($("#templateViewPrincipale").html()),
+            initialize: function(options){
+                this.collection = options.collection;
+                // Permet de spécifier le contexte de la méthode
+                // Par défaut quand le fetch est terminé, createView est executé par la collection
+                // Or on souhaite que ça soit la vue (fonction un peu plus bas)
+                _.bindAll(this, 'createView');
+            },
+
+            render: function(){
+                // fetch récupère la liste des photos en json via le serveur
+                this.collection.fetch({
+                    // execute  createView quand  le fetch est terminé
+                    success: this.createView
+                });
+
+                $(this.el).html( this.template() );
+
+                return this;
+            },
+
+            createView: function(){
+                // Pour chaque élément de la collection on créé une sous vue
+                this.collection.each(_.bind(function(image){
+                    var previewImageView = new PreviewImageView({ model: image}).render();
+                    $(this.el).append(previewImageView.$el.html());
+
+                }, this))
+            }
+        });
+
+        //---------------------2
+        window.PreviewImageView = Backbone.View.extend({
+            tagName: 'li',
+          template: _.template($("#templateView").html()),
+
+          initialize: function(options){
+              this.render();
+          },
+
+          render: function(){
+
+              var htmlOutput = this.template(this.model.toJSON());
+
+              this.$el.html(htmlOutput);
+              return this;
+          }
+        });
+
+        /*--- Router ---------------------------------------*/
+        window.ImageRouter = Backbone.Router.extend({
+
+          routes: {
+              '': 'home'
+          },
+
+          home: function(){
+              window.photos = new Photos();
+
+              window.listImageView = new ListImageView({
+                  collection: window.photos
+              }).render()
+          }
+        });
+
+        (function($) {
+          $(document).ready(function(){
+              window.App = new window.ImageRouter();
+              Backbone.history.start();
+          });
+        })(jQuery);
+</script>
+</html>
