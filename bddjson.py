@@ -1,14 +1,24 @@
+#!/usr/bin/python
+
+# ################################################################
+#
+# Projet                    : iFeedBird
+# Auteurs                   : Romain Fabbro, Florian Fauchier
+#                             www.natural-solutions.eu
+# Programme                 : bddjson.py
+# Version                   : 0.1
+# Derniere modification     : 16-06-2015
+# Version Python            : 2.7
+#
+# ################################################################
+
 import json
 import datetime
 import operator
 
-PHOTOS_DIR_PATH = "/home/pi/www/flask/static/photos/"
-SERVER_DIR_PATH = "/home/pi/www/flask/"
-IFEEDB_DIR_PATH = "/home/pi/iFeedBird"
+JSON_FILE_PATH = "/home/pi/iFeedBird/flask/static/db.json"
 
 # -----------------------------------------------------------------------------
-# from : ecoReleve-Server/ecorelevesensor/utils/eval.py
-
 
 class Eval:
 
@@ -33,7 +43,7 @@ class Eval:
 # -----------------------------------------------------------------------------
 
 
-class BddJson (Eval):
+class BddJson(Eval):
 
     listeObjJson = []
 
@@ -43,33 +53,45 @@ class BddJson (Eval):
         self.listObj = [Photo(**obj) for obj in listeObjJson]
         # self.listObj = listeObjJson
 
+    # ----------------------------------------
+
     def where(self, attr, operator, value):
-        result = list(filter(lambda x : self.eval(getattr(x, attr), operator, value), self.listObj))
-        # result =list(filter(lambda x : self.eval(x[attr],operator,value),self.listObj))
-        return result
-
-    def delete(listObj):
-        # photo_id = "5"
-        
-        # recupere le path de la photo, puis supprimer
-        photo_name = 
-        photo_path = PHOTOS_DIR_PATH + photo_name
         try:
-            os.system("rm %s" % jpg_path)
-            print("[--- Photo " + photo_name + " correctement supprimee ---]")
-        except Exception, e:
-            raise e
-        
+            result = list(filter(lambda x: self.eval(
+                getattr(x, attr), operator, value
+                ), self.listObj))
+            return result
+        except Exception as err:
+            print("[--- where : Erreur lors de l'ecriture JSON ---]")
+            print(err)
 
-        # faire la liste moins l'element a delete
-        result = list(filter(lambda x : self.eval(getattr(x, attr), operator, value), self.listObj))
-        
-        # faire le save avec la nouvelle liste
-        save()
+    # ----------------------------------------
 
-    def save(self):
-        dictTo_dump = {'photos': []}
-        json.dumps(self.listObj)
+    def delete(self, jpg_id):
+        try:
+            listeObjets = json.load(open(JSON_FILE_PATH))
+            listeObjets = list(filter(
+                lambda x: x['ID'] != jpg_id, listeObjets['photos']
+                ))
+            self.saveJson(listeObjets)
+        except Exception as err:
+            print("[--- delete : Erreur lors de l'ecriture JSON ---]")
+            print(err)
+
+    # ----------------------------------------
+
+    def saveJson(self, listeObjets):
+        try:
+            with open(JSON_FILE_PATH, mode='r') as f1:
+                fichierOuvert = json.load(f1)
+
+            with open(JSON_FILE_PATH, mode='w') as f2:
+                fichierOuvert["photos"] = listeObjets
+                json.dump(fichierOuvert, f2, indent=4, separators=(',', ': '))
+                f2.close()
+        except Exception as e:
+            print("[--- saveJson : Erreur lors de l'ecriture JSON ---]")
+            print(e)
 
 # -----------------------------------------------------------------------------
 

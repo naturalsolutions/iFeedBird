@@ -1,19 +1,17 @@
 #!/usr/bin/python
 
+# ################################################################
 #
 # Projet                    : iFeedBird
 # Auteurs                   : Romain Fabbro, Florian Fauchier
 #                             www.natural-solutions.eu
 # Programme                 : program.py
 # Version                   : 0.2
-# Derniere modification     : 11-06-2015
+# Derniere modification     : 15-06-2015
 # Version Python            : 2.7
 # Version lib GPIO          : 0.5.11
 #
-
-'''
-Programme de prise automatique de photos par detection infrarouge
-'''
+# ################################################################
 
 import smtplib
 import string
@@ -26,6 +24,13 @@ import threading
 import json
 from time import strftime, gmtime
 
+PROJECT_PATH = "/home/pi/iFeedBird/"
+PHOTOS_DIRECTORY = "/home/pi/iFeedBird/flask/static/photos/"
+PHOTOS_DIRECTORY_REL = "/static/photos/"
+JSON_FILE = "/home/pi/iFeedBird/flask/static/db.json"
+
+TIME_STOP_PREVIEW = 5
+
 # Configuration des GPIO
 GPIO.setmode(GPIO.BCM)    # set GPIO for IR motion Detector
 PIR = 21                  # numero du GPIO utilise par la camera
@@ -35,15 +40,6 @@ GPIO.setup(PIR, GPIO.IN)  # set le GPIO en entree
 frames = 1                # nombre d'images par seconde
 XRES = 800                # largeur de l'image en pixel
 YRES = 600                # hauteur de l'image en pixel
-
-SUNSET_WIN = 17
-SUNSET_SUM = 20
-SUNRISE_WIN = 9
-SUNRISE_SUM = 7
-TIME_STOP_PREVIEW = 5
-PROJECT_PATH = "/home/pi/iFeedBird/"
-PHOTOS_DIRECTORY = "/home/pi/iFeedBird/flask/static/photos/"
-JSON_FILE = "/home/pi/iFeedBird/flask/static/db.json"
 
 # parametres email
 fromaddr = 'arpegius.ff@gmail.com'
@@ -64,11 +60,15 @@ def saveJson(fname, heure_capture):
 
         with open(JSON_FILE, mode='w') as f2:
             heure_capture = strftime("%d %m %Y %H:%M:%S")
-            # startCaptureString = str(startCapture)
             to_add = {
-                    'Lien': PHOTOS_DIRECTORY + str(fname),
-                    'Heure': heure_capture,
-                    'Nom': fname
+                    'ID': fname.replace(".jpg", ""),
+                    'Nom': fname,
+                    'Mois': fname[3:-18],
+                    'Jour': fname[:-21],
+                    'Annee': fname[6:-13],
+                    'Heure': fname[11:-4],
+                    'Date': heure_capture,
+                    'Lien': PHOTOS_DIRECTORY_REL + str(fname)
                     }
             actu["photos"].append(to_add)
             json.dump(actu, f2, indent=4, separators=(',', ': '))
@@ -123,43 +123,29 @@ def capture(camera):
     updateJSONThread.start()
     time.sleep(1)
     print("[--- Info sauvegardees ---]")
-    '''send_email(fname)
-    print("Email envoye")
-    time.sleep(10)'''
+    # send_email(fname)
+    print("[--- Email envoye ! ---]")
+    print("[--- Attendre avant nouvelle detection ...---]")
+    time.sleep(5)
 
 # ----------------------------------------------------------------------------
 '''
-Prise de photo avec parametres de l'imagedatetime.datetime.now().
-'''
-
-
-def capture2(camera):
-    heure_capture = strftime("%d-%m-%Y_%H:%M:%S")
-    fname = (heure_capture + '.jpg')
-    print(fname)
-    # source = PROJECT_PATH + fname
-    # destination = PROJECT_PATH + 'photos/' + fname
-    os.system("raspistill -v -q 100 -w 640 -h 480 -t 1000 -n -o " + fname)
-    # os.rename(source, destination)
-    print(fname)
-    print("[--- CAPTURED ---]")
-    time.sleep(1)
-    updateJSONThread = threading.Thread(target=saveJson(fname, heure_capture))
-    updateJSONThread.start()
-
-# ----------------------------------------------------------------------------
-'''
-Move picture to an other directory
+Deplacer le fichier image dans un autre repertoire
 '''
 
 
 def move():
-    for file in os.listdir(PROJECT_PATH):
-        if file.endswith(".jpg"):
-            source = PROJECT_PATH + str(file)
-            # destination = PROJECT_PATH + 'photos/' + str(file)
-            destination = PHOTOS_DIRECTORY2 + str(file)
-            os.rename(source, destination)
+    try:
+        for file in os.listdir(PROJECT_PATH):
+            if file.endswith(".jpg"):
+                source = PROJECT_PATH + str(file)
+                # destination = PROJECT_PATH + 'photos/' + str(file)
+                destination = PHOTOS_DIRECTORY + str(file)
+                os.rename(source, destination)
+    except Exception as e:
+        print("[--- CUT/PAST FAILED ---]")
+        print(e)
+
 
 # ----------------------------------------------------------------------------
 '''
