@@ -150,7 +150,7 @@
     </script>
 
     <script>
-    /*--- Modele -------------------------------------------*/
+        /*--- Modele -------------------------------------------*/
     	window.Photo = Backbone.Model.extend({
     		defaults: {
     			titre: 'Photo',
@@ -175,7 +175,7 @@
 
         /*--- VIEW ---------------------------------------------*/
 
-        //---------------------1
+        //--------------------- 1
         window.ListImageView = Backbone.View.extend({
             tagName: 'ul',
             el: '#view_principale',
@@ -210,7 +210,7 @@
             }
         });
 
-        //---------------------2
+        //--------------------- 2
         window.PreviewImageView = Backbone.View.extend({
             tagName: 'li',
           template: _.template($("#templateView").html()),
