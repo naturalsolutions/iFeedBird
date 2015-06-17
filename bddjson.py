@@ -15,8 +15,11 @@
 import json
 import datetime
 import operator
+import os
 
 JSON_FILE_PATH = "/home/pi/iFeedBird/flask/static/db.json"
+PHOTOS_DIR_PATH = "/home/pi/iFeedBird/flask/static/photos/"
+
 
 # -----------------------------------------------------------------------------
 
@@ -74,6 +77,12 @@ class BddJson(Eval):
                 lambda x: x['ID'] != jpg_id, listeObjets['photos']
                 ))
             self.saveJson(listeObjets)
+
+            photo_path = PHOTOS_DIR_PATH + jpg_id + ".jpg"
+            if os.path.isfile(photo_path):
+                os.remove(photo_path)
+            else:
+                print("Error: %s file not found" % photo_path)
         except Exception as err:
             print("[--- delete : Erreur lors de l'ecriture JSON ---]")
             print(err)

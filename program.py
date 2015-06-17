@@ -185,7 +185,7 @@ def main():
             hour = utc_hour + 2
             if (hour < 0):
                 hour = hour + 24
-            if GPIO.input(PIR) and hour < SUNSET_SUM and hour > SUNRISE_SUM:
+            if GPIO.input(PIR):
                 captureThread = threading.Thread(target=ecoute(PIR))
                 captureThread.start()
             print("sleep for %d sec" % 2)
