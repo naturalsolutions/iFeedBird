@@ -5,18 +5,14 @@ import datetime
 dt = datetime.datetime.now()
 dt = dt.replace(hour=0, minute=0, second=0, microsecond=0)
 
-# remplace la selection de la photo depuis backbone en attendant
-jpg_id = "1"
+jpg_id = ""
+attribut = ""
+valeur = ""
 
-# instance classe BddJson
-# djson = bddjson.BddJson("./flask/static/db.json")
-djson = bddjson.BddJson("db.json")
+djson = bddjson.BddJson("./flask/static/db.json")
 
 # djson.delete(jpg_id)
-# print(bddjson.where('ID', '=', 1)[0].__dict__)
-# print(djson.where('ID', '=', '1')[0].__dict__)
-
-attribut = "obiwan"
-valeur = "kenobi"
-
-djson.insert(jpg_id, attribut, valeur)
+# newPhoto = bddjson.Photo(Lien =  "/static/photos/18-07-2015_11:16:24.jpg")
+# djson.insert(newPhoto)
+print(djson.where('Date', '<', dt)[0].toJSON())
+# djson.insert(jpg_id, attribut, valeur)
