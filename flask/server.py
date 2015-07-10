@@ -13,7 +13,7 @@ from alchemy import Photos, Base
 # djson = bddjson.BddJson("./static/db.json")
 
 # PROJECT PATH
-PHOTOS_DIR_PATH = "/home/pi/iFeedBird/flask/static/photos/"
+PHOTOS_DIR_PATH = "/home/pi/NS_iFeedBird/flask/static/photos/"
 SQLITE_PATH = 'sqlite:///database/sqlalchemy_example.db'
 
 # EMAIL SETTINGS
@@ -41,7 +41,7 @@ def main_vue():
 @app.route('/capture_program')
 def exec_capture():
     flux_shell = subprocess.call(
-        'sudo python /home/pi/iFeedBird/program.py',
+        'sudo python /home/pi/NS_iFeedBird/program.py',
         shell=True
         )
 
