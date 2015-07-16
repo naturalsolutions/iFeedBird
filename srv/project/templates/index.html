@@ -108,7 +108,6 @@
     <script src="../static/libs/vendors/jquery.js"></script><!--V 1.10.2-->
     <script src="../static/libs/vendors/underscore.js"></script><!--V 1.5.2 -->
     <script src="../static/libs/vendors/backbone.js"></script><!--V 1.1.0 -->
-    <script src="../static/libs/vendors/backbone.marionette.js"></script>
     <script src="../static/libs/vendors/bootstrap.min.js"></script>
     <script type="text/javascript">
         function change(){
@@ -130,10 +129,10 @@
             <div class="div_images">
                 <div class="intro_photo">
                     <h5>ID : <%= ID %></h5>
-                    <h5>Heure : <%= date %></h5>
+                    <h5>Heure : <%= Heure %></h5>
                 </div>
                 <div class="images">
-                <a href="<%= path %>"><img class="img-rounded img-responsive" src="<%= resized %>" alt="Photo"/></a>
+                <a href="<%= Lien %>"><img class="img-rounded img-responsive" src="<%= Miniature %>" alt="Photo"/></a>
                 </div>
                 <div class="action_photo">
                 <button data-id="<%= ID %>" class="btn btn-block btn-lg btn-warning removeButton">Supprimer</button>
@@ -173,9 +172,9 @@
         <div class="row" >
             <p>iFeedBird est un projet basé sur Raspberry Pi, qui permet de prendre en photo les oiseaux s'approchant d'une mangeoire
                 et de reconnaitre l'espèce.</p>
-            <p>Il utilise les composants suivants :
+            <p>Il met utilise les composants suivants :
             <ul>
-                <li>Raspberry Pi A+</li>
+                <li>Raspberry Pi B+</li>
                 <li>Capteur infrarouge</li>
                 <li>Capteur ultrason</li>
                 <li>Appareil photo PiCamera</li>

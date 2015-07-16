@@ -10,19 +10,15 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from alchemy import Photos, Base
 
-# djson = bddjson.BddJson("./static/db.json")
-
 # PROJECT PATH
 PHOTOS_DIR_PATH = "/home/pi/iFeedBird/flask/static/photos/"
-SQLITE_PATH = 'sqlite:///database/sqlalchemy_example.db'
+SQLITE_PATH = 'sqlite:///database/sqlite.db'
 
 # EMAIL SETTINGS
 fromaddr = ''
 toaddr = ''
 username = ''
 password = ''
-
-# -----------------------------------------------------------------------------
 
 app = Flask(__name__)
 
@@ -41,28 +37,33 @@ def main_vue():
 @app.route('/capture_program')
 def exec_capture():
     flux_shell = subprocess.call(
-        'sudo python /home/pi/iFeedBird/program.py',
+        'sudo python /home/pi/iFeedBird/main.py',
         shell=True
         )
 
     return flux_shell
 
 # -----------------------------------------------------------------------------
-# delete json
 
 
-'''@app.route('/delete/<jpg_id>', methods=['DELETE'])
-def delete(jpg_id):
-    try:
-        djson.delete(jpg_id)
-    except Exception as err:
-        print("Erreur lors de la suppresion des photos.")
-        print(err)
+@app.route('/photos', methods=['GET'])
+def getPhotos():
+    engine = create_engine(SQLITE_PATH)
+    Base.metadata.bind = engine
 
-    return json.dumps({'res': True})'''
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+
+    listphotos = session.query(Photos).all()
+    tab = []
+    for each in listphotos:
+        tmp = each.toJSON()
+        tmp['resized'] = tmp['resized'].split('flask')[-1]
+        tmp['path'] = tmp['path'].split('flask')[-1]
+        tab.append(tmp)
+    return json.dumps(tab)
 
 # -----------------------------------------------------------------------------
-# delete sqlite
 
 
 @app.route('/delete/<jpg_id>', methods=['DELETE'])
@@ -74,7 +75,7 @@ def deleteSQLite(jpg_id):
     session = DBSession()
 
     try:
-        form = session.query(Photos).filter_by(fname=jpg_id + '.jpg').first()
+        form = session.query(Photos).get(jpg_id)
         print(form)
         session.delete(form)
         session.commit()
@@ -83,12 +84,13 @@ def deleteSQLite(jpg_id):
         print('Erreur lors de la suppresion de la photo de la base de donnees')
 
     try:
+
         subprocess.call(
-            'sudo rm ' + PHOTOS_DIR_PATH + jpg_id + '.jpg',
+            'sudo rm ' + form.fpath,
             shell=True
         )
         subprocess.call(
-            'sudo rm ' + PHOTOS_DIR_PATH + 'resized_' + jpg_id + '.jpg',
+            'sudo rm ' + form.rfpath,
             shell=True
         )
     except Exception as err:
@@ -124,33 +126,6 @@ def contact():
         'form_action.html',
         name=name, email=email,
         message=message)
-
-# -----------------------------------------------------------------------------
-
-
-@app.route('/photos', methods=['GET'])
-def index():
-    with open('static/db.json') as file:
-        data = json.loads(file.read())
-        return json.dumps(data['photos'])
-
-# -----------------------------------------------------------------------------
-
-
-'''@app.route('/photos', methods=['GET'])
-def select_photos():
-    engine = create_engine(SQLITE_PATH)
-
-    Base.metadata.bind = engine
-    DBSession = sessionmaker(bind=engine)
-    session = DBSession()
-
-    form = session.query(Photos).all
-
-    session.delete(form)
-    session.commit()
-
-    return json.dumps({'res': True})'''
 
 # -----------------------------------------------------------------------------
 

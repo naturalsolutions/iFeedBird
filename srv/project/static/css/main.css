@@ -1,0 +1,34 @@
+body{
+    font-family: Trebuchet MS;
+    padding-top: 51px !important;
+}
+
+.col-lg-12 h1 {
+  text-align: center;
+  color: white;
+}
+.row{
+    height: auto;
+    width: auto;
+}
+
+.div_images{
+    width: 100%;
+}
+
+.images {
+    box-shadow: 5px 5px 50px #000;
+    background-image: none;
+}
+
+.portfolio-item img {
+    width: 100%;
+}
+
+.container-fluid {
+  background-image: url('../images/bg_bird.jpg');
+  background-position: 0;
+  background-size: 100%;
+  padding-bottom: 20px;
+  background-repeat: none;
+}

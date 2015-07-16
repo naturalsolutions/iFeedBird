@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+# Auteurs : Romain Fabbro, Florian Fauchier
 
 import PIL
 from PIL import Image
@@ -7,7 +8,6 @@ import time
 import picamera
 import RPi.GPIO as GPIO
 import os
-import json
 import smtplib
 import string
 from time import strftime, gmtime
@@ -20,8 +20,7 @@ PROJECT_PATH = "/home/pi/iFeedBird/"
 PHOTOS_DIRECTORY = "/home/pi/iFeedBird/flask/static/photos/"
 PHOTOS_DIRECTORY_REL = "/static/photos/"
 JSON_FILE = "/home/pi/iFeedBird/flask/static/db.json"
-SQLITE_PATH_EXAMPLE = "sqlite:///sqlalchemy_example.db"
-SQLITE_PATH = "sqlite:///flask/database/database.db"
+SQLITE_PATH = "sqlite:///flask/database/sqlite.db"
 DISTANCE_TRIGGER = 200
 
 # EMAIL SETTINGS
@@ -60,35 +59,8 @@ def send_email(fname):
 # ----------------------------------------------------------------------------
 
 
-def insertjson(fname, heure_capture):
-    try:
-        with open(JSON_FILE, mode='r') as f1:
-            actu = json.load(f1)
-
-        with open(JSON_FILE, mode='w') as f2:
-            heure_capture = strftime("%d %m %Y %H:%M:%S")
-            to_add = {
-                    'Comment': 'None',
-                    'speciesID': 'None',
-                    'ID': fname.replace(".jpg", ""),
-                    'Nom': fname,
-                    'Date': heure_capture,
-                    'Heure': fname[11:-4],
-                    'Lien': PHOTOS_DIRECTORY_REL + str(fname),
-                    'Miniature': PHOTOS_DIRECTORY_REL + "resized_" + str(fname)
-                    }
-            actu["photos"].append(to_add)
-            json.dump(actu, f2, indent=4, separators=(',', ': '))
-            f2.close()
-    except Exception as e:
-        print("[--- Erreur lors de l'ecriture JSON ---]")
-        print(e)
-
-# ----------------------------------------------------------------------------
-
-
 def insertsqlite(filename, heure_capture):
-    engine = create_engine(SQLITE_PATH_EXAMPLE)
+    engine = create_engine(SQLITE_PATH)
     Base.metadata.bind = engine
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
@@ -96,8 +68,8 @@ def insertsqlite(filename, heure_capture):
     new_photo = Photos(
         fname=filename,
         date=heure_capture,
-        fpath=PHOTOS_DIRECTORY_REL + str(filename),
-        rfpath=PHOTOS_DIRECTORY_REL + "resized_" + str(filename),
+        fpath=PHOTOS_DIRECTORY + str(filename),
+        rfpath=PHOTOS_DIRECTORY + "resized_" + str(filename),
         comment='None',
         espece='None'
         )
@@ -114,7 +86,6 @@ def capture(camera):
     camera.resolution = (1024, 728)
     camera.capture(fname)
     move()
-    insertjson(fname, heure_capture)
     insertsqlite(fname, heure_capture)
     camera.close()
 
