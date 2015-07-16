@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Auteurs : Romain Fabbro, Florian Fauchier
+# Authors: Romain Fabbro, Florian Fauchier
 
 import PIL
 from PIL import Image
@@ -16,8 +16,8 @@ from sqlalchemy.orm import sessionmaker
 from alchemy import Photos, Base
 
 # PROJECT PATH
-PROJECT_PATH = "/home/pi/iFeedBird/"
-PHOTOS_DIRECTORY = "/home/pi/iFeedBird/flask/static/photos/"
+PROJECT_PATH = "/home/pi/NS_iFeedBird/"
+PHOTOS_DIRECTORY = "/home/pi/NS_iFeedBird/flask/static/photos/"
 PHOTOS_DIRECTORY_REL = "/static/photos/"
 JSON_FILE = "/home/pi/iFeedBird/flask/static/db.json"
 SQLITE_PATH = "sqlite:///flask/database/sqlite.db"

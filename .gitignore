@@ -1,6 +1,10 @@
 **/*.jpg
+
 **/*.db
+
 **/*.json
+!db.json
+
 **/*.settings
 
 *.py
