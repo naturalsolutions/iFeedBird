@@ -13,3 +13,9 @@
 
 /flask*.py
 !server.py
+
+sftp-config.json
+
+*.pyc
+
+srv
