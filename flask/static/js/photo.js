@@ -12,7 +12,7 @@ window.Photo = Backbone.Model.extend({
         species: 'species'
     },
     initialize: function(options){
-    	console.log("initialize model photo");
+    	console.log("initialize model Photo");
     }
 });
 
@@ -24,7 +24,7 @@ window.Photos = Backbone.Collection.extend({
     url: '/photos',
 
     initialize: function(){
-        console.log("initialize collection photos")
+        console.log("initialize collection Photos")
     }
 });
 
@@ -36,7 +36,7 @@ window.ListImageView = Backbone.View.extend({
     tagName: 'ul',
     template: _.template($("#templateViewPrincipale").html()),
     initialize: function(options){
-        console.log('initialize view principale');
+        console.log('initialize ListImageView');
         this.collection = options.collection;
 
         _.bindAll(this, 'createView');
@@ -44,7 +44,7 @@ window.ListImageView = Backbone.View.extend({
     },
 
     render: function(){
-        console.log('render view principale');
+        console.log('render ListImageView');
         this.collection.fetch({
             success: this.createView
         });
@@ -56,7 +56,7 @@ window.ListImageView = Backbone.View.extend({
 
     createView: function(){
 
-        console.log('createView view principale');
+        console.log('createView ListImageView');
         this.collection.each(_.bind(function(image){
             var previewImageView = new PreviewImageView({ model: image}).render();
             $(this.el).append(previewImageView.$el);
@@ -66,7 +66,7 @@ window.ListImageView = Backbone.View.extend({
     },
 
     deleteView: function(){
-        console.log('deleteView view principale');
+        console.log('deleteView ListImageView');
         _.each(this.viewZ, function(view){
             view.remove()
         })
@@ -81,7 +81,7 @@ window.PreviewImageView = Backbone.View.extend({
     template: _.template($("#templateView").html()),
 
     initialize: function(options){
-        console.log('initialize view photos');
+        console.log('initialize PreviewImageView');
     },
 
     events:
@@ -90,7 +90,7 @@ window.PreviewImageView = Backbone.View.extend({
     },
 
     render: function(){
-        console.log('render view photos');
+        console.log('render PreviewImageView');
         var htmlOutput = this.template(this.model.toJSON());
         this.$el.html(htmlOutput);
         console.log(this)
@@ -119,7 +119,7 @@ window.HomeView = Backbone.View.extend({
     template: _.template($("#templateViewHome").html()),
 
     initialize: function(options) {
-        console.log("test");
+        console.log("initialize window.HomeView");
         //this.render();
       },
 
@@ -137,7 +137,7 @@ window.InfoAppView = Backbone.View.extend({
     template: _.template($("#templateInfoAppView").html()),
 
     initialize: function(options) {
-        console.log('dans le initialize de la view info projet');
+        console.log('initialize window.InfoAppView');
       },
 
     render: function() {
@@ -155,7 +155,7 @@ window.ContactView = Backbone.View.extend({
     template: _.template($("#templateContact").html()),
 
     initialize: function(options) {
-        console.log('dans le initialize de la view contact');
+        console.log('initialize window.ContactView');
       },
 
     render: function() {

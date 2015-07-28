@@ -11,7 +11,6 @@ from sqlalchemy.orm import sessionmaker
 from alchemy import Photos, Base
 
 # PROJECT PATH
-PHOTOS_DIR_PATH = "/home/pi/iFeedBird/flask/static/photos/"
 SQLITE_PATH = 'sqlite:///database/sqlite.db'
 
 # EMAIL SETTINGS

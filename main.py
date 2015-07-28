@@ -2,32 +2,24 @@
 # -*- coding: utf-8 -*-
 # Authors: Romain Fabbro, Florian Fauchier
 
-import PIL
-from PIL import Image
-import time
-import picamera
-import RPi.GPIO as GPIO
-import os
-import smtplib
-import string
-from time import strftime, gmtime
-from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+from time import strftime, gmtime
+import RPi.GPIO as GPIO
+from PIL import Image
+import picamera
+import time
+import PIL
+import os
+import sys
+sys.path.append('/home/pi/ceillac/flask/alchemy.py')
 from alchemy import Photos, Base
 
 # PROJECT PATH
-PROJECT_PATH = "/home/pi/NS_iFeedBird/"
-PHOTOS_DIRECTORY = "/home/pi/NS_iFeedBird/flask/static/photos/"
-PHOTOS_DIRECTORY_REL = "/static/photos/"
-JSON_FILE = "/home/pi/iFeedBird/flask/static/db.json"
 SQLITE_PATH = "sqlite:///flask/database/sqlite.db"
-DISTANCE_TRIGGER = 200
-
-# EMAIL SETTINGS
-fromaddr = ''
-toaddr = ''
-username = ''
-password = ''
+PROJECT_PATH = "/home/pi/ceillac/"
+PHOTOS_DIRECTORY = "/home/pi/ceillac/flask/static/photos/"
+DISTANCE_TRIGGER = 150
 
 # GPIO SETTINGS
 GPIO.setmode(GPIO.BCM)
@@ -38,23 +30,6 @@ GPIO.setup(PIR, GPIO.IN)
 GPIO.setup(ECH, GPIO.IN)
 GPIO.setup(TRI, GPIO.OUT)
 GPIO.output(TRI, 0)
-
-# ----------------------------------------------------------------------------
-
-
-def send_email(fname):
-    BODY = string.join((
-        "From: %s" % fromaddr,
-        "To: %s" % toaddr,
-        "Subject: Test email",
-        "",
-        "May the Force be with you. %s" % fname,
-        ), "\r\n")
-    server = smtplib.SMTP('smtp.gmail.com:587')
-    server.starttls()
-    server.login(username, password)
-    server.sendmail(fromaddr, toaddr, BODY)
-    server.quit()
 
 # ----------------------------------------------------------------------------
 
@@ -84,6 +59,22 @@ def capture(camera):
     heure_capture = strftime("%d-%m-%Y_%H:%M:%S")
     fname = (heure_capture + '.jpg')
     camera.resolution = (1024, 728)
+    camera.sharpness = 0
+    camera.contrast = 0
+    camera.brightness = 50
+    camera.saturation = 0
+    camera.ISO = 0
+    camera.video_stabilization = False
+    camera.exposure_compensation = 0
+    camera.exposure_mode = 'auto'
+    camera.meter_mode = 'average'
+    camera.awb_mode = 'auto'
+    camera.image_effect = 'none'
+    camera.color_effects = None
+    camera.rotation = 0
+    camera.hflip = False
+    camera.vflip = False
+    camera.crop = (0.0, 0.0, 1.0, 1.0)
     camera.capture(fname)
     move()
     insertsqlite(fname, heure_capture)
@@ -120,6 +111,7 @@ def move():
 
 def main():
     try:
+        nb_detection = 0
         while True:
             utc_hour = int(strftime("%H", gmtime()))
             hour = utc_hour + 2
@@ -137,7 +129,8 @@ def main():
             distance = (stop - start) * 17000
             time.sleep(0.1)
             if GPIO.input(PIR) and distance < DISTANCE_TRIGGER:
-                print('\n _______  ___   _______  _______  _______  __   __    __  \n|       ||   | |       ||       ||   _   ||  | |  |  |  | \n|   _   ||   | |  _____||    ___||  |_|  ||  | |  |  |  | \n|  | |  ||   | | |_____ |   |___ |       ||  |_|  |  |  | \n|  |_|  ||   | |_____  ||    ___||       ||       |  |__| \n|       ||   |  _____| ||   |___ |   _   ||       |   __  \n|_______||___| |_______||_______||__| |__||_______|  |__| \n\n')
+                nb_detection = nb_detection + 1
+                print('! ' + str(nb_detection) + ' !')
                 camera = picamera.PiCamera()
                 capture(camera)
             time.sleep(0.1)

@@ -1,21 +1,13 @@
 **/*.jpg
-
 **/*.db
-
 **/*.json
-!db.json
-
 **/*.settings
+**/*.pyc
 
 *.py
 !main.py
 !distance.py
 
-/flask*.py
-!server.py
-
 sftp-config.json
-
-*.pyc
 
 srv

@@ -23,8 +23,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script data-main="../static/app/config" src="../static/libs/vendors/requirejs/require.js"></script>
 </head>
-
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -58,36 +58,9 @@
         <!-- /.container -->
     </nav>
 
-    <div class="wide">
-    </div>
-
     <!-- Page Content -->
-    <div class="container-fluid">
+    <div class="container-fluid" id="main_region">
 
-        <!-- Page Heading -->
-        <div class="row">
-            <div class="col-lg-12">
-            <p>
-                <h1>iFeedBird</h1>
-            </p>
-            </div>
-        </div>
-
-        <div id="container">
-            <div id="elViewPrincipale"></div>
-        </div>
-
-        <div id="containerViewHome">
-            <div id="viewHome"></div>
-        </div>
-
-        <div id="containerInfoWebApp">
-            <div id="elViewInfoApp"></div>
-        </div>
-
-        <div id="containerContact">
-            <div id="elViewContact"></div>
-        </div>
     </div>
     <!-- Footer -->
     <footer>
@@ -173,9 +146,9 @@
         <div class="row" >
             <p>iFeedBird est un projet basé sur Raspberry Pi, qui permet de prendre en photo les oiseaux s'approchant d'une mangeoire
                 et de reconnaitre l'espèce.</p>
-            <p>Il met utilise les composants suivants :
+            <p>Il utilise les composants suivants :
             <ul>
-                <li>Raspberry Pi B+</li>
+                <li>Raspberry Pi A+</li>
                 <li>Capteur infrarouge</li>
                 <li>Capteur ultrason</li>
                 <li>Appareil photo PiCamera</li>
@@ -207,7 +180,9 @@
     </script>
 
     <!--
+
         ################### FIN VUES BACKBONE ###################
+
     -->
 
     <!-- Chargement des fichiers de la web app -->
