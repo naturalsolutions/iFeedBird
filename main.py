@@ -12,13 +12,13 @@ import time
 import PIL
 import os
 import sys
-sys.path.append('/home/pi/ceillac/flask/alchemy.py')
+sys.path.append('/home/pi/iFeedBird/flask/alchemy.py')
 from alchemy import Photos, Base
 
 # PROJECT PATH
 SQLITE_PATH = "sqlite:///flask/database/sqlite.db"
-PROJECT_PATH = "/home/pi/ceillac/"
-PHOTOS_DIRECTORY = "/home/pi/ceillac/flask/static/photos/"
+PROJECT_PATH = "/home/pi/iFeedBird/"
+PHOTOS_DIRECTORY = "/home/pi/iFeedBird/flask/static/photos/"
 DISTANCE_TRIGGER = 150
 
 # GPIO SETTINGS
@@ -79,6 +79,7 @@ def capture(camera):
     move()
     insertsqlite(fname, heure_capture)
     camera.close()
+    print('FINISH !')
 
 # ----------------------------------------------------------------------------
 
