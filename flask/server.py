@@ -2,13 +2,17 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, request, render_template
-import json
+# import os
+import sys, json
 import string
 import smtplib
 import subprocess
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import update
+from sqlalchemy.orm import Session, sessionmaker
 from alchemy import Photos, Base
+from traceback import print_exc
+
 
 # PROJECT PATH
 SQLITE_PATH = 'sqlite:///database/sqlite.db'
@@ -60,7 +64,57 @@ def getPhotos():
         tmp['resized'] = tmp['resized'].split('flask')[-1]
         tmp['path'] = tmp['path'].split('flask')[-1]
         tab.append(tmp)
+    print(json.dumps(tab))
+
     return json.dumps(tab)
+
+# -----------------------------------------------------------------------------
+
+
+@app.route('/photos/<photo_id>', methods=['GET'])
+def getPhotoHD(photo_id):
+    engine = create_engine(SQLITE_PATH)
+    Base.metadata.bind = engine
+
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+
+    try:
+        photohd = session.query(Photos).get(photo_id)
+        # TODO form = session.query(Photos).get(jpg_id)
+        # tab = []
+        # for each in photohd:
+        #     tmp = each.toJSON()
+        #     tmp['path'] = tmp['path'].split('flask')[-1]
+        #     tab.append(tmp)
+        print(photohd.ficheEspece.toJSON())
+        tmp = photohd.toJSON()
+    except Exception as err:
+        print_exc()
+        print('error get photo HD')
+    return json.dumps(tmp)
+
+# -----------------------------------------------------------------------------
+
+
+@app.route('/photos/<photo_id>/species', methods=['GET'])
+def getFicheEspece(photo_id):
+
+    engine = create_engine(SQLITE_PATH)
+    Base.metadata.bind = engine
+
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+
+    try:
+        photohd = session.query(Photos).get(photo_id)
+        fiche = photohd.ficheEspece
+
+    except Exception as err:
+        print_exc()
+        print("err get fiche espece")
+
+    return json.dumps(fiche.toJSON())
 
 # -----------------------------------------------------------------------------
 
@@ -83,18 +137,50 @@ def deleteSQLite(jpg_id):
         print('Erreur lors de la suppresion de la photo de la base de donnees')
 
     try:
+        subprocess.call('sudo rm ' + form.fpath, shell=True)
+        # os.system('sudo rm ' + form.fpath)
+        subprocess.call('sudo rm ' + form.rfpath, shell=True)
+        # os.system('sudo rm ' + form.rfpath)
 
-        subprocess.call(
-            'sudo rm ' + form.fpath,
-            shell=True
-        )
-        subprocess.call(
-            'sudo rm ' + form.rfpath,
-            shell=True
-        )
     except Exception as err:
         print(err)
         print('Erreur lors de la suppresion des fichiers jpg')
+
+    return json.dumps({'res': True})
+
+# -----------------------------------------------------------------------------
+
+
+@app.route('/photos/<photo_id>', methods=['PUT'])
+def update_details_photo(photo_id):
+
+    data = request.data
+    # comment = request.form['comment']
+    print(json.loads(str(data)))
+
+    # engine = create_engine(SQLITE_PATH)
+    # Base.metadata.bind = engine
+    # DBSession = sessionmaker(bind=engine)
+    # session = DBSession()
+
+    # # # request = Photos.insert().values(test=comment)
+    # # # rqst = session.update.values(name=name)
+    # # tochange = session.query(Photos).get(jpg_id)
+    # # rqst = tochange.update.values(name=name)
+    # # # stmt = Photos.update().\
+    # # #       where(table.c.data == 'value').\
+    # # #       values(status='X').\
+    # # #       returning(table.c.server_flag,
+    # # #                 table.c.updated_timestamp)
+    # # print(rqst)
+
+    # session.query().\
+    #        filter(Photos.id == jpg_id).\
+    #        update({"name": name})
+
+    # session.commit()
+
+    # session.update().where(Photos.id == 5).values(comment="comment")
 
     return json.dumps({'res': True})
 
@@ -114,7 +200,6 @@ def contact():
         "",
         "Message : %s" % message,
         ), "\r\n")
-    # send the email
     server = smtplib.SMTP('smtp.gmail.com:587')
     server.starttls()
     server.login(username, password)

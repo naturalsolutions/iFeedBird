@@ -1,0 +1,32 @@
+<div class="detailsMainRegion" style="border:1px solid #C0C0C0;color:#404040;padding:0 10px 10px 20px;margin:10px 0;border-radius:10px;box-shadow:3px 3px 6px 0 #A9A9A9;background-color: rgba(240, 240, 240, 1);">
+    <h3 class="text-center">Informations sur la photo</h3>
+    <h5>Nom du fichier : <%= name %></h5>
+    <h5>Date : <%= date %></h5>
+    <h5>Espèce détectée : </h5>
+    <div class="">
+        <a href="<%= path %>"><img class="" src="<%= path %>" alt="Photo" height="100%" width="100%"/></a><br>
+    </div>
+    
+        <input name="action" value="submit" type="hidden">
+        <br>
+        Nom de la photo :
+        <br>
+        <input id = "name" type="text" value="<%= name %>" placeholder="Saisir un nouveau nom" name="name" class="form-control" size="30">
+        Commentaire :
+        <br>
+        <textarea id="comment" type="text" value="<%= comment %>" name="comment" placeholder="Saisir un commentaire" rows="5" class="form-control"></textarea><br>
+        <button id ="btn-save" class="btn btn-block btn-lg btn-primary" value="Sauvegarder" type="submit">Sauvegarder</button>
+    
+</div>
+
+<!--
+    <form method="post" action="{{ url_for('editPhoto') }}">
+        Editer le nom : <br>
+        <input type="text" value="" placeholder="Saisir un nouveau nom" name="name" class="form-control" size="40">
+        Ajouter un commentaire : <br>
+        <textarea name="message" placeholder="Saisir un commentaire" rows="5" class="form-control"></textarea><br>
+        <input class="btn btn-block btn-lg btn-primary" value="Sauvegarder" type="submit">
+    </form>
+
+{{ url_for('details_photo') }}
+-->

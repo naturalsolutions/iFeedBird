@@ -1,13 +1,20 @@
+flask/static/front/bower_components/
+flask/static/front/node_modules/
+flask/static/species/
+flask/database/
+flask/templates/fonts/
+
 **/*.jpg
 **/*.db
+!sqlite.db
 **/*.json
 **/*.settings
 **/*.pyc
 
 *.py
 !main.py
-!distance.py
+!main2.py
+!alchemy.py
+!server.py
 
 sftp-config.json
-
-srv

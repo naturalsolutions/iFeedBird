@@ -1,0 +1,19 @@
+<div class="container">
+    <div id="framephoto">
+    </div>
+    <div id="photoframe" class="col-md-3 col-sm-4 portfolio-item">
+        <div class="div-images">
+            <div class="intro-photo">
+                <h5>Nom : <%= ID %></h5>
+                <h5>Date et heure : <%= date %></h5>
+            </div>
+            <div class="images">
+                <a href="<%= path %>"><img class="img-rounded img-responsive view-details" src="<%= resized %>" alt="Photo"/></a>
+            </div>
+            <div class="action_delete">
+                <button data-id="<%= ID %>" class="btn btn-block btn-lg btn-warning btnDelete" id="btnDelete">Delete</button>
+            </div>
+            <a href="#details/<%= ID %>" class="btn btn-block btn-lg btn-default">Détails</a>
+        </div>
+    </div>
+</div>

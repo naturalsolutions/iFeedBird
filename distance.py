@@ -40,6 +40,7 @@ def main():
             print("Temps : " + str(temps))
             distance = (stop - start) * 17000
             print("Distance : " + str(distance))
+            time.sleep(1)
 
     except KeyboardInterrupt:
         print("[--- EXIT (except KeyboardInterrupt) ---]")
