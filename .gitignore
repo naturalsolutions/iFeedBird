@@ -12,8 +12,8 @@ flask/templates/fonts/
 **/*.pyc
 
 *.py
-!main.py
-!main2.py
+!program1.py
+!program2.py
 !alchemy.py
 !server.py
 
