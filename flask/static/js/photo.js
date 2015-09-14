@@ -3,13 +3,42 @@
 window.Photo = Backbone.Model.extend({
 	defaults:
     {
-		Titre: 'Photo',
-		Heure: 'Inconnue',
-        Chemin: '/home/pi/iFeedBird/flask/static/photos/',
-        Miniature: '/home/pi/iFeedBird/flask/static/photos/'
+        ID: 'id',
+		title: 'photo',
+		date: 'date',
+        path: '/home/pi/iFeedBird/flask/static/photos/',
+        resized: '/home/pi/iFeedBird/flask/static/photos/',
+        comment: 'comment',
+        species: 'species'
+    },
+
+    initialize: function(options){
+    	console.log("initialize model Photo");
+    }
+});
+
+window.Espece = Backbone.Model.extend({
+    defaults:
+    {
+        ID_espece: 'id',
+        frequency: 'photo',
+        name_fr: 'a determiner',
+        name_en: 'a determiner',
+        name_la: 'a determiner',
+        authority: 'comment',
+        wingspan: 'comment',
+        weight: 'comment',
+        length: 'comment',
+        red_list_category: 'comment',
+        distribution: 'comment',
+        description: 'comment',
+        photo1: 'comment',
+        photo2: 'comment',
+        photo3: 'comment',
+        photo4: 'comment'
     },
     initialize: function(options){
-    	console.log("initialize model photo");
+        console.log("initialize model Photo");
     }
 });
 
@@ -21,7 +50,7 @@ window.Photos = Backbone.Collection.extend({
     url: '/photos',
 
     initialize: function(){
-        console.log("initialize collection photos")
+        console.log("initialize collection Photos")
     }
 });
 
@@ -33,7 +62,7 @@ window.ListImageView = Backbone.View.extend({
     tagName: 'ul',
     template: _.template($("#templateViewPrincipale").html()),
     initialize: function(options){
-        console.log('initialize view principale');
+        console.log('initialize ListImageView');
         this.collection = options.collection;
 
         _.bindAll(this, 'createView');
@@ -41,7 +70,7 @@ window.ListImageView = Backbone.View.extend({
     },
 
     render: function(){
-        console.log('render view principale');
+        console.log('render ListImageView');
         this.collection.fetch({
             success: this.createView
         });
@@ -53,7 +82,7 @@ window.ListImageView = Backbone.View.extend({
 
     createView: function(){
 
-        console.log('createView view principale');
+        console.log('createView ListImageView');
         this.collection.each(_.bind(function(image){
             var previewImageView = new PreviewImageView({ model: image}).render();
             $(this.el).append(previewImageView.$el);
@@ -63,7 +92,7 @@ window.ListImageView = Backbone.View.extend({
     },
 
     deleteView: function(){
-        console.log('deleteView view principale');
+        console.log('deleteView ListImageView');
         _.each(this.viewZ, function(view){
             view.remove()
         })
@@ -78,16 +107,18 @@ window.PreviewImageView = Backbone.View.extend({
     template: _.template($("#templateView").html()),
 
     initialize: function(options){
-        console.log('initialize view photos');
+        console.log('initialize PreviewImageView');
     },
 
     events:
     {
-        'click button': 'deletePhoto'
+        'click #btn-delete': 'deletePhoto',
+        'click #btn-ficheespece' : 'getFicheEspece',
+        'click #btn-jpg' : 'getPhotoHD'
     },
 
     render: function(){
-        console.log('render view photos');
+        console.log('render PreviewImageView');
         var htmlOutput = this.template(this.model.toJSON());
         this.$el.html(htmlOutput);
         console.log(this)
@@ -96,12 +127,36 @@ window.PreviewImageView = Backbone.View.extend({
 
     deletePhoto: function(e){
         var photo_id = $(e.target).data('id');
-        
+
         $.ajax({
             type: 'DELETE',
             url: '/delete/' + photo_id,
             success: _.bind(function(){
                 this.remove();
+            }, this)
+        })
+    },
+
+    getPhotoHD: function(e){
+        var photo_id = $(e.target).data('id');
+
+        $.ajax({
+            type: 'GET',
+            url: '/photohd/' + photo_id,
+            success: _.bind(function(data){
+                console.log(data);
+            }, this)
+        })
+    },
+
+    getFicheEspece: function(e){
+        var espece_id = $(e.target).data('id');
+
+        $.ajax({
+            type: 'GET',
+            url: '/ficheespece/' + espece_id,
+            success: _.bind(function(data){
+                console.log(data);
             }, this)
         })
     }
@@ -112,12 +167,10 @@ window.PreviewImageView = Backbone.View.extend({
 
 window.HomeView = Backbone.View.extend({
 
-    //el: '#viewHome',
     template: _.template($("#templateViewHome").html()),
 
     initialize: function(options) {
-        console.log("test");
-        //this.render();
+        console.log("initialize window.HomeView");
       },
 
     render: function() {
@@ -134,7 +187,7 @@ window.InfoAppView = Backbone.View.extend({
     template: _.template($("#templateInfoAppView").html()),
 
     initialize: function(options) {
-        console.log('dans le initialize de la view info projet');
+        console.log('initialize window.InfoAppView');
       },
 
     render: function() {
@@ -152,7 +205,7 @@ window.ContactView = Backbone.View.extend({
     template: _.template($("#templateContact").html()),
 
     initialize: function(options) {
-        console.log('dans le initialize de la view contact');
+        console.log('initialize window.ContactView');
       },
 
     render: function() {

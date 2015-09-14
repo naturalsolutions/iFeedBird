@@ -1,5 +1,10 @@
 #!/usr/bin/python
 
+#
+# retourne la distance a laquelle se trouve un obstacle
+# en face du capteur a ultrason
+#
+
 import time
 import RPi.GPIO as GPIO
 
@@ -17,7 +22,6 @@ GPIO.setup(ECHO, GPIO.IN)
 def main():
     try:
         while True:
-            time.sleep(0.1)
             print("[--- DEBUT DE LA MESURE ---]")
 
             GPIO.output(TRIG, 1)
@@ -36,6 +40,7 @@ def main():
             print("Temps : " + str(temps))
             distance = (stop - start) * 17000
             print("Distance : " + str(distance))
+            time.sleep(1)
 
     except KeyboardInterrupt:
         print("[--- EXIT (except KeyboardInterrupt) ---]")

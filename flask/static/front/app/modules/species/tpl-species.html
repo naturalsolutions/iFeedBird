@@ -1,0 +1,42 @@
+<div class="speciesMainRegion" style="border:1px solid #C0C0C0;color:#404040;padding:0 10px 10px 20px;margin:10px 0;border-radius:10px;box-shadow:3px 3px 6px 0 #A9A9A9;background-color: rgba(240, 240, 240, 1);">
+	<h3 class="text-center">Information sur l'espèce détectée</h3>
+	<div class="species-generalities">
+		<h4>Généralités</h4>
+		<h5>Nom français : <%= name_fr %></h5>
+		<h5>Nom anglais : <%= name_en %></h5>
+		<h5>Nom latin : <%= name_la %></h5>
+		<h5>Authority : <%= authority %></h5>
+		<h5>Occurence : <%= frequency %></h5>
+	</div>
+	<br>
+	<div class="species-pictures-gallery">
+		<div class="species-picture-1 col-md-6"><img class="img-rounded img-responsive" src="<%= photo1 %>" alt="picture1"/></div>
+		<div class="species-picture-2 col-md-6"><img class="img-rounded img-responsive" src="<%= photo2 %>" alt="picture2"/></div>
+		<br>
+	</div>
+	<div class="species-biometrics">
+		<h4>Biométrie</h4>
+	</div>
+	<div class="species-size">
+		<h5>Taille (cm) : <%= length %></h5>
+	</div>
+	<div class="species-wingspan">
+		<h5>Envergure (cm) : <%= wingspan %></h5>
+	</div>
+	<div class="species-weight">
+		<h5>Poids (g) : <%= weight %></h5>
+	</div>
+	<div class="red-list-category">
+		<h4>Statut de protection : <%= red_list_category %></h4>
+	</div>
+	<div class="species-description" align="justify">
+		<h4>Description</h4>
+		<h5><%= description %></h5>
+	</div>
+	<div class="">
+		<h4>Répartition géographique : </h4>
+	</div>
+	<div class="">
+		<img class="img-rounded img-responsive" src="<%= distribution %>" alt="map"/>
+	</div>
+</div>

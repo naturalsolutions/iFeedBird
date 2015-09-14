@@ -1,0 +1,318 @@
+
+.login-page{
+	background: #000;
+	color: white;
+	text-align: center;
+	background: url(./img/bg-login/bg-login.jpg) center center no-repeat;
+	background-position: center;
+	background-attachment: fixed;
+	background-size: cover;
+
+	.logo{
+		height: 100px;
+		width: 100%;
+		background-size: cover;
+		background-position: center;
+	}
+
+	
+	.login-form{
+		position: absolute;
+		padding: 35px 0px;
+		height: 500px;
+		width: 350px;
+		background: rgba(0,0,0,0.7);
+		margin: auto;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		font-size: 15px;
+		border-radius: 8px;
+		form{
+			width: 250px;
+			margin: auto;
+		}
+		h1{
+			text-align: center;
+			font-size: 50px;
+			font-weight: 700;
+			letter-spacing: 3.3px;
+			margin: 10px 0px;
+			position: relative;
+			&:before, &:after {
+				content: 'RENECORE';
+				position: absolute;
+				text-align: center;
+			}
+			&:before { 
+				left: 0px;
+				right: 2px;
+				top: -1px;
+			}
+			&:after{
+				left: 2px;
+				right: 0px;
+				top: 1px;
+				color: rgba(255,255,255,.05
+					);
+			}
+		}
+		h2{
+			text-align: center;
+			font-size: 18px;
+			font-weight: 600;
+			letter-spacing: 1.45px;
+			margin: 5px 0px;
+			position: relative;
+			/*
+			&:before, &:after {
+				//content: 'Emirates Centre for Wildlife Propagation';
+				position: absolute;
+				text-align: center;
+			}
+			&:before { 
+				left: 0px;
+				right: 1px;
+				top: -1px;
+			}
+			&:after{
+				left: 1px;
+				right: 0px;
+				top: 1px;
+				color: rgba(255,255,255,.05
+					);
+			}*/
+		}
+		h3{
+			color: white;
+			font-size: 19px;
+			font-weight: 300;
+			line-height: 25px;
+			margin: 10px 0px;
+		}
+		.help-block{
+			transition: all .5s ease;
+			margin: 0px;
+			background: #e7332a;
+			color: white;
+			padding-left: 15px;
+			line-height: 40px;
+			text-align: left;
+		}
+		.hidden{
+			display: none;
+		}
+		#username{
+			background: transparent;
+			color: white;
+			box-shadow: none;
+			border: none;
+			height: 40px;
+			border-radius: 0px;
+		}
+
+		#password{
+			background: transparent;
+			color: white;
+			box-shadow: none;
+			border: none;
+			height: 40px;
+			border-radius: 0px;
+		}
+		button[type="submit"]{
+			margin-top: 20px;
+			background: transparent;
+			border: 1px solid black;
+			box-shadow: 0px;
+			border-radius: 2px;
+			color: black;
+			width: 75px;
+			&:hover, &:focus{
+				box-shadow: none;
+			}
+		}
+		.form-group{
+			margin: 0px;
+		}
+		.wrapper{
+			border: 1px solid white;
+			border-radius: 2px;
+		}
+		::-webkit-input-placeholder { /* WebKit browsers */
+			color: white;
+		}
+		:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+			color: white;
+			opacity:  1;
+		}
+		::-moz-placeholder { /* Mozilla Firefox 19+ */
+			color: white;
+			opacity:  1;
+		}
+		:-ms-input-placeholder { /* Internet Explorer 10+ */
+			color: white;
+		}
+	}
+
+	&.ECCH{
+		@form-color: #174e5f;
+		background: url(./img/bg-login/ECCH_bg.jpg) center center no-repeat;
+		.login-form{
+			background-image: linear-gradient(180deg, #51d2f5 0%, #047b9f 100%);
+		}
+		.logo{
+			background: url(./img/logo/ECCH_logo.png) center center no-repeat;
+		}
+		h1, h2{
+			color: @form-color;
+		}
+	}
+
+	&.ECWP_E{
+		@form-color: #1b3257;
+		background: url(./img/bg-login/ECWP_E_bg.jpg) center center no-repeat;
+		.login-form{
+			background-image: linear-gradient(180deg, #4a90e2 0%, #294094 100%);
+		}
+		.logo{
+			background: url(./img/logo/ECWP_logo.png) center center no-repeat;
+		}
+		h1, h2{
+			color: @form-color;
+		}
+	}
+	&.ECWP_M{
+		@form-color: #68560c;
+		background: url(./img/bg-login/ECWP_M_bg.jpg) center center no-repeat;
+		.login-form{
+			background-image: linear-gradient(180deg, #f8eb1c 0%, #d68617 100%);
+		}
+		.logo{
+			background: url(./img/logo/ECWP_logo.png) center center no-repeat;
+		}
+		h1, h2{
+			color: @form-color;
+		}
+	}
+	&.ECWP_O{
+		@form-color: #4e1805;
+		background: url(./img/bg-login/ECWP_O_bg.jpg) center center no-repeat;
+		.login-form{
+			background-image: linear-gradient(180deg, #d44d08 0%, #791212 100%);
+		}
+		.logo{
+			background: url(./img/logo/ECWP_logo.png) center center no-repeat;
+		}
+		h1, h2{
+			color: @form-color;
+		}
+	}
+
+	&.NARC{
+		@form-color: #64141e;
+		background: url(./img/bg-login/NARC_bg.jpg) center center no-repeat;
+		.login-form{
+			background-image: linear-gradient(180deg, #e93232 0%, #d6295d 100%);
+		}
+		.logo{
+			background: url(./img/logo/NARC_logo.png) center center no-repeat;
+		}
+		h1, h2{
+			color: @form-color;
+		}
+	}
+	&.RAFHBC{
+		@form-color: #174522;
+		background: url(./img/bg-login/RAFHBC_bg.jpg) center center no-repeat;
+		.login-form{
+			background-image: linear-gradient(180deg, #39b34a 0%, #277b52 100%);
+		}
+		.logo{
+			background: url(./img/logo/RAFHBC_logo.png) center center no-repeat;
+		}
+		h1, h2{
+			color: @form-color;
+		}
+	}
+
+	&.SKHBC_AD{
+		@form-color: #633712;
+		background: url(./img/bg-login/SKHBC_AD_bg.jpg) center center no-repeat;
+		.login-form{
+			background-image: linear-gradient(180deg, #ffa540 0%, #aa3a00 100%);
+		}
+		.logo{
+			background: url(./img/logo/NARC_logo.png) center center no-repeat;
+		}
+		h1, h2{
+			color: @form-color;
+		}
+	}
+	&.SKHBC_KZ{
+		@form-color: #1c4018;
+		background: url(./img/bg-login/SKHBC_KZ_bg.jpg) center center no-repeat;
+		.login-form{
+			background-image: linear-gradient(180deg, #39b34a 0%, #4c5915 100%);
+		}
+		.logo{
+			background: url(./img/logo/SKHBC_KZ_logo.png) center center no-repeat;
+		}
+		h1, h2{
+			color: @form-color;
+		}
+	}
+
+	&.RENECORE{
+		@form-color: #1d3859;
+		background: url(./img/bg-login/RENECORE_bg.jpg) center center no-repeat;
+		.login-form{
+			background: #4a90e2;
+			border-radius: 50%;
+			height: 600px;
+			width: 600px;
+			padding: 200px 100px;
+			background: url(./img/logo/RENECORE_logo.png) center center no-repeat #4a90e2;
+			background-size: cover;
+		}
+		.logo{
+			display: none;
+		}
+		h1, h2{
+			color: @form-color;
+		}
+		h2, h3{
+			display: none;
+		}
+	}
+
+	span.credits{
+		text-align: center;
+		position: absolute;
+		bottom: 20px;
+		right: 20px;
+		left: 20px;
+		color: white;
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 22px;
+		letter-spacing: 0.83px;
+		& a{
+			color: white;
+			&:hover, &:focus{
+				color: white;
+			}
+			text-decoration: underline;
+		}
+	}
+
+	@media screen and (max-width: @screen-sm){
+		.login-form{
+			//background: none!important;
+			width: 375px!important;
+			height: 375px!important;
+			padding: 100px 0px!important;
+		}
+	}
+}

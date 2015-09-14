@@ -3,6 +3,10 @@ body{
     padding-top: 51px !important;
 }
 
+ul{
+    list-style-type: none;
+}
+
 .col-lg-12 h1 {
   text-align: center;
   color: white;
