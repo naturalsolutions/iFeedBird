@@ -16,5 +16,6 @@ flask/templates/fonts/
 !program2.py
 !alchemy.py
 !server.py
+!distance.py
 
 sftp-config.json

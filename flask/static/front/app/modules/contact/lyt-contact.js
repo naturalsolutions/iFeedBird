@@ -7,7 +7,6 @@ function(Marionette, LytContact) {
     className: 'full-height',
     
     initialize: function(options){
-      console.log('init lyt contact');
     },
 
     onShow: function(){
