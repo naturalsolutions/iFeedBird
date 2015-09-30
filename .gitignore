@@ -6,3 +6,5 @@ photos/
 
 front/app/styles/
 npm-debug.log
+
+**/*.pyc
