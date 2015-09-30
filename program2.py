@@ -10,12 +10,12 @@ import threading
 import time
 import os
 import sys
-sys.path.append('/home/pi/iFeedBird/flask/alchemy.py')
+sys.path.append('/home/pi/iFeedBird/back/alchemy.py')
 from alchemy import Photos, Base
 
-SQLITE_PATH = "sqlite:///flask/database/sqlite.db"
+SQLITE_PATH = "sqlite:///back/database/sqlite.db"
 PROJECT_PATH = "/home/pi/iFeedBird/"
-PHOTOS_DIRECTORY = "/home/pi/iFeedBird/flask/static/photos/"
+PHOTOS_DIRECTORY = "/home/pi/iFeedBird/photos/"
 
 # GPIO SETTINGS
 GPIO.setmode(GPIO.BCM)
