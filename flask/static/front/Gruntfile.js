@@ -163,8 +163,8 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', [
 		//'jshint',
 		//'clean:dist',
-		//'jst',
-		//'less',
+		'jst',
+		'less',
 		'requirejs',
 		//'jasmine'
 	]);

@@ -1404,12 +1404,10 @@ a.bg-danger:focus {
   margin: 40px 0 20px;
   border-bottom: 1px solid #eeeeee;
 }
-
 ul,
 ol {
   margin-top: 0;
   margin-bottom: 10px;
-  list-style-type: none;
 }
 ul ul,
 ol ul,
@@ -10424,8 +10422,7 @@ body {
   height: 200px;
 }
 header {
-  /*background: green;*/
-  background-color: #009900;
+  background: green;
   z-index: 10;
   color: white;
   position: fixed;
