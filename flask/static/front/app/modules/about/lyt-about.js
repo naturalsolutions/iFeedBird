@@ -7,7 +7,6 @@ function(Marionette, LytAbout) {
     className: 'full-height',
 
     initialize: function(options){
-      console.log('init layout about');
     },
 
     onShow: function(){

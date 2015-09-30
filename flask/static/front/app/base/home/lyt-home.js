@@ -14,22 +14,27 @@ function(Marionette) {
 			'startCapture' : '#startCapture'
 		},
 
-
-		initialize: function(options){
+		initialize: function(options) {
 		},
-
 
 		onShow : function(options) {
 			this.$el.find('#tiles').i18n();
 		},		
 
-
 		startCapture: function(e){
-			//TODO :start capture function
-			if(this.ui.startCapture.hasClass('active')) {
-				this.ui.startCapture.removeClass('active').html('Start Capture');
-			}else{
-				this.ui.startCapture.addClass('active').html('Stop Capture');
+			$.ajax({
+			url: "/capture_program",
+			   success: function(response){
+			      console.log('success')
+			   }
+			});
+
+			if(this.ui.startCapture.hasClass('active')){
+			       this.ui.startCapture.removeClass('active').html('Start Capture');
+			}
+
+			else {
+			     this.ui.startCapture.addClass('active').html('Stop Capture');
 			}
 		},
 	});
