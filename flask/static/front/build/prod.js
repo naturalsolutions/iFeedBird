@@ -12368,7 +12368,9 @@ function(Marionette, Photo) {
   return Marionette.ItemView.extend({
     template: 'app/modules/details/tpl-details.html',
     className: 'full-height',
-
+    events:{
+      'click #btn-save': 'savePhoto',
+    },
     initialize: function(options){
      /* this.model = new Photo({id : this.id});
       this.model.fetch();*/
@@ -12381,6 +12383,13 @@ function(Marionette, Photo) {
     onShow: function(){
       this.render();
     },
+
+    savePhoto: function(){
+      this.model.comment = 'toto';//this.$el.find('#comment').value();
+
+      this.model.save();
+    }
+
   })
 });
 
@@ -12622,9 +12631,11 @@ __p += '<div class="detailsMainRegion" style="border:1px solid #C0C0C0;color:#40
 ((__t = ( path )) == null ? '' : __t) +
 '"><img class="" src="' +
 ((__t = ( path )) == null ? '' : __t) +
-'" alt="Photo" height="100%" width="100%"/></a><br>\r\n    </div>\r\n    <form method="put" action="/details_photo/' +
-((__t = ( id )) == null ? '' : __t) +
-'">\r\n        <input name="action" value="submit" type="hidden">\r\n        <br>\r\n        Nom de la photo :\r\n        <br>\r\n        <input type="text" value="" placeholder="Saisir un nouveau nom" name="name" class="form-control" size="30">\r\n        Commentaire :\r\n        <br>\r\n        <textarea type="text" value="" name="comment" placeholder="Saisir un commentaire" rows="5" class="form-control"></textarea><br>\r\n        <input class="btn btn-block btn-lg btn-primary" value="Sauvegarder" type="submit">\r\n    </form>\r\n</div>\r\n\r\n<!--\r\n    <form method="post" action="{{ url_for(\'editPhoto\') }}">\r\n        Editer le nom : <br>\r\n        <input type="text" value="" placeholder="Saisir un nouveau nom" name="name" class="form-control" size="40">\r\n        Ajouter un commentaire : <br>\r\n        <textarea name="message" placeholder="Saisir un commentaire" rows="5" class="form-control"></textarea><br>\r\n        <input class="btn btn-block btn-lg btn-primary" value="Sauvegarder" type="submit">\r\n    </form>\r\n\r\n{{ url_for(\'details_photo\') }}\r\n-->\r\n';
+'" alt="Photo" height="100%" width="100%"/></a><br>\r\n    </div>\r\n    \r\n        <input name="action" value="submit" type="hidden">\r\n        <br>\r\n        Nom de la photo :\r\n        <br>\r\n        <input id = "name" type="text" value="' +
+((__t = ( name )) == null ? '' : __t) +
+'" placeholder="Saisir un nouveau nom" name="name" class="form-control" size="30">\r\n        Commentaire :\r\n        <br>\r\n        <textarea id="comment" type="text" value="' +
+((__t = ( comment )) == null ? '' : __t) +
+'" name="comment" placeholder="Saisir un commentaire" rows="5" class="form-control"></textarea><br>\r\n        <button id ="btn-save" class="btn btn-block btn-lg btn-primary" value="Sauvegarder" type="submit">Sauvegarder</button>\r\n    \r\n</div>\r\n\r\n<!--\r\n    <form method="post" action="{{ url_for(\'editPhoto\') }}">\r\n        Editer le nom : <br>\r\n        <input type="text" value="" placeholder="Saisir un nouveau nom" name="name" class="form-control" size="40">\r\n        Ajouter un commentaire : <br>\r\n        <textarea name="message" placeholder="Saisir un commentaire" rows="5" class="form-control"></textarea><br>\r\n        <input class="btn btn-block btn-lg btn-primary" value="Sauvegarder" type="submit">\r\n    </form>\r\n\r\n{{ url_for(\'details_photo\') }}\r\n-->\r\n';
 
 }
 return __p
@@ -12686,7 +12697,11 @@ __p += '<div class="speciesMainRegion" style="border:1px solid #C0C0C0;color:#40
 ((__t = ( authority )) == null ? '' : __t) +
 '</h5>\r\n\t\t<h5>Occurence : ' +
 ((__t = ( frequency )) == null ? '' : __t) +
-'</h5>\r\n\t</div>\r\n\t<br>\r\n\t<div class="species-pictures-gallery">\r\n\t\t<div class="species-picture-1 col-md-6"><img class="img-rounded img-responsive" src="" alt="picture1"/></div>\r\n\t\t<div class="species-picture-2 col-md-6"><img class="img-rounded img-responsive" src="" alt="picture2"/></div>\r\n\t\t<br>\r\n\t</div>\r\n\t<div class="species-class">\r\n\t\t<h5>Class : </h5>\r\n\t</div>\r\n\t<div class="species-order">\r\n\t\t<h5>Order : </h5>\r\n\t</div>\r\n\t\t<div class="species-family">\r\n\t<h5>Family : </h5>\r\n\t</div>\r\n\t<div class="species-genderAchanger">\r\n\t\t<h5>Genre : </h5><br>\r\n\t</div>\r\n\t<div class="species-biometrics">\r\n\t\t<h4>Biométrie</h4>\r\n\t</div>\r\n\t<div class="species-size">\r\n\t\t<h5>Taille (cm) : ' +
+'</h5>\r\n\t</div>\r\n\t<br>\r\n\t<div class="species-pictures-gallery">\r\n\t\t<div class="species-picture-1 col-md-6"><img class="img-rounded img-responsive" src="' +
+((__t = ( photo1 )) == null ? '' : __t) +
+'" alt="picture1"/></div>\r\n\t\t<div class="species-picture-2 col-md-6"><img class="img-rounded img-responsive" src="' +
+((__t = ( photo2 )) == null ? '' : __t) +
+'" alt="picture2"/></div>\r\n\t\t<br>\r\n\t</div>\r\n\t<div class="species-biometrics">\r\n\t\t<h4>Biométrie</h4>\r\n\t</div>\r\n\t<div class="species-size">\r\n\t\t<h5>Taille (cm) : ' +
 ((__t = ( length )) == null ? '' : __t) +
 '</h5>\r\n\t</div>\r\n\t<div class="species-wingspan">\r\n\t\t<h5>Envergure (cm) : ' +
 ((__t = ( wingspan )) == null ? '' : __t) +

@@ -1,6 +1,7 @@
 flask/static/front/bower_components/
 flask/static/front/node_modules/
-flask/static/front/build/
+flask/static/front/build/**
+
 flask/static/species/
 flask/templates/fonts/
 
