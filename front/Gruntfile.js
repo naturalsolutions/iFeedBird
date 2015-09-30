@@ -84,34 +84,10 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		jasmine: {
-			all:{
-				src : 'app/modules/{,*/}*.js',
-				options: {
-					keepRunner: true,
-					specs : 'test/**/*.js',
-					vendor : [
-						'bower_components/jquery/dist/jquery.js',
-						'bower_components/underscore/underscore.js',
-						'bower_components/backbone/backbone.js',
-						'bower_components/marionette/lib/core/backbone.marionette.js',
-						'bower_components/backbone.babysitter/lib/backbone.babysitter.js',
-						'bower_components/backbone.wreqr/lib/backbone.wreqr.js',
-						'bower_components/bootstrap/dist/js/bootstrap.js',      
-					]
-				}
-			}
-		}, 
 
 		/*==========  Build Tasks  ==========*/
 		clean: {
 			dist: ['build'],
-		},
-		jshint: {
-			all: [
-				'Gruntfile.js',
-				'app/**/*.js',
-			]
 		},
 
 
@@ -119,18 +95,18 @@ module.exports = function(grunt) {
 		fileblocks: {
 			options: {
 				templates: {
-					'js': '<script data-main="../static/front/app/main" src="../static/front/${file}"></script>',
+					'js': '<script data-main="./app/main" src="front/${file}"></script>',
 				},
 				removeFiles : true
 			},
 			prod: {
-				src: '../../templates/index.html',
+				src: 'index.html',
 				blocks: {
 					'app': { src: 'build/prod.js' }
 				}
 			},
 			develop: {
-				src: '../../templates/index.html',
+				src: 'index.html',
 				blocks: {
 					'app': { src: 'bower_components/requirejs/require.js' }
 				}
@@ -146,27 +122,21 @@ module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.loadNpmTasks('grunt-contrib-jasmine');
-
 	grunt.loadNpmTasks('grunt-contrib-jst');
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
 
 	grunt.loadNpmTasks('grunt-contrib-less');
 
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-
 	grunt.loadNpmTasks('grunt-file-blocks');
 
 	/*==========  Regitred Tasks  ==========*/
 
 	grunt.registerTask('build', [
-		//'jshint',
-		//'clean:dist',
+		'clean:dist',
 		'jst',
 		'less',
 		'requirejs',
-		//'jasmine'
 	]);
 
 	grunt.registerTask('dev', ['build', 'fileblocks:develop']);
