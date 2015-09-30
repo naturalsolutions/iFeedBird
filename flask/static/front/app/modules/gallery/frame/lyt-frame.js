@@ -12,10 +12,9 @@ define(['jquery','marionette'],
             paragraph: 'p',
             button: '.my-button'
     },
-
+ 
     events: {
         //'click @ui.button': 'clickedButton',
-
         'click #btnDelete': 'deletePhoto',
         'click #btnViewDetails' : 'viewDetails'
     },
@@ -33,10 +32,8 @@ define(['jquery','marionette'],
 
     viewDetails: function(e){
         var photo_id = $(e.target).data('id');
-        
-        // todo : switcher vers la vue "details"
         this.rgMain.show(new LytDetails());
-    }
+    },
 
     deletePhoto: function(e){
         var photo_id = $(e.target).data('id');

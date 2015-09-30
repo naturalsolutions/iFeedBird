@@ -36,7 +36,7 @@ class Photos(Base):
             "speciesID": self.FK_espece
         }
 
-# -------------------
+# ----------------------------------------------
 
 
 class Especes(Base):
@@ -55,8 +55,8 @@ class Especes(Base):
     red_list_category = Column(String(4))
     distribution = Column(String(256))
     description = Column(String(256))
-    photo1 = Column(String(256))
-    photo2 = Column(String(256))
+    # photo1 = Column(String(256))
+    # photo2 = Column(String(256))
     # photos = Column(String)
     # photo2 = Column(String(256))
     # photo3 = Column(String(256))
@@ -74,10 +74,10 @@ class Especes(Base):
             "length": self.length,
             "red_list_category": self.red_list_category,
             "distribution": self.distribution,
-            "description": self.description,
-            "photo1": self.photo1,
-            "photo2": self.photo2
-            #"photos": self.photos
+            "description": self.description
+            # "photo1": self.photo1,
+            # "photo2": self.photo2
+            # "photos": self.photos
         }
 
 # ----------------------------------------------

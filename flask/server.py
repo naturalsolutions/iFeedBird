@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, request, render_template
-# import os
-import sys, json
+import json
 import string
 import smtplib
 import subprocess
@@ -12,7 +11,6 @@ from sqlalchemy import update
 from sqlalchemy.orm import Session, sessionmaker
 from alchemy import Photos, Base
 from traceback import print_exc
-
 
 # PROJECT PATH
 SQLITE_PATH = 'sqlite:///database/sqlite.db'
@@ -40,10 +38,9 @@ def main_vue():
 @app.route('/capture_program')
 def exec_capture():
     flux_shell = subprocess.call(
-        'sudo python /home/pi/iFeedBird/main.py',
+       'sudo python /home/pi/iFeedBird/main.py',
         shell=True
         )
-
     return flux_shell
 
 # -----------------------------------------------------------------------------
@@ -119,16 +116,16 @@ def getFicheEspece(photo_id):
 # -----------------------------------------------------------------------------
 
 
-@app.route('/delete/<jpg_id>', methods=['DELETE'])
-def deleteSQLite(jpg_id):
-    print(jpg_id)
+@app.route('/delete/<photo_id>', methods=['DELETE'])
+def deleteSQLite(photo_id):
+    print(photo_id)
     engine = create_engine(SQLITE_PATH)
     Base.metadata.bind = engine
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
 
     try:
-        form = session.query(Photos).get(jpg_id)
+        form = session.query(Photos).get(photo_id)
         print(form)
         session.delete(form)
         session.commit()
@@ -137,11 +134,14 @@ def deleteSQLite(jpg_id):
         print('Erreur lors de la suppresion de la photo de la base de donnees')
 
     try:
-        subprocess.call('sudo rm ' + form.fpath, shell=True)
-        # os.system('sudo rm ' + form.fpath)
-        subprocess.call('sudo rm ' + form.rfpath, shell=True)
-        # os.system('sudo rm ' + form.rfpath)
-
+        subprocess.call(
+            'sudo rm ' + form.fpath,
+            shell=True
+        ) # os.system('sudo rm ' + form.fpath)
+        subprocess.call(
+            'sudo rm ' + form.rfpath,
+            shell=True
+        ) # os.system('sudo rm ' + form.rfpath)
     except Exception as err:
         print(err)
         print('Erreur lors de la suppresion des fichiers jpg')

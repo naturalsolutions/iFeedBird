@@ -17,8 +17,8 @@ define([
 	        length: null,
 	        red_list_category: null,
 	        distribution: null,
-	        description: null,
-	        photos:null
+	        description: null
+	        //photos:null
 		},
 		
 		

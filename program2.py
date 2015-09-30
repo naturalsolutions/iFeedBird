@@ -6,10 +6,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from time import strftime, gmtime
 import RPi.GPIO as GPIO
-from PIL import Image
 import threading
 import time
-import PIL
 import os
 import sys
 sys.path.append('/home/pi/iFeedBird/flask/alchemy.py')
@@ -53,37 +51,9 @@ def capture():
     fname = (heure_capture + '.jpg')
     source = PHOTOS_DIRECTORY + fname
     os.system("raspistill -t 10 -o " + source + " -n -w 1024 -h 768 -q 50")
-    # moveFileThread = threading.Thread(target=move())
-    # moveFileThread.start()
-    # sqliteThread = threading.Thread(target=insertsqlite(fname, heure_capture))
-    # sqliteThread.start()
+    sqliteThread = threading.Thread(target=insertsqlite(fname, heure_capture))
+    sqliteThread.start()
     print('Capture done.')
-
-# ----------------------------------------------------------------------------
-
-
-def move():
-    try:
-        for file in os.listdir(PROJECT_PATH):
-            if file.endswith(".jpg"):
-                source = PROJECT_PATH + str(file)
-                destination = PHOTOS_DIRECTORY + str(file)
-                os.rename(source, destination)
-
-                basewidth = 300
-                img = Image.open(destination)
-                wpercent = (basewidth / float(img.size[0]))
-                hsize = int((float(img.size[1]) * float(wpercent)))
-                img = img.resize((basewidth, hsize), PIL.Image.ANTIALIAS)
-                img.save('resized_' + str(file))
-
-                os.rename(
-                    'resized_' + str(file),
-                    PHOTOS_DIRECTORY + 'resized_' + str(file)
-                    )
-    except Exception as e:
-        print("[--- Le fichier n'a pu etre deplace ---]")
-        print(e)
 
 # ----------------------------------------------------------------------------
 

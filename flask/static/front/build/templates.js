@@ -54,7 +54,7 @@ this["JST"]["app/modules/details/tpl-details.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="detailsMainRegion" style="border:1px solid #C0C0C0;color:#404040;padding:0 10px 10px 20px;margin:10px 0;border-radius:10px;box-shadow:3px 3px 6px 0 #A9A9A9;background-color: rgba(240, 240, 240, 1);">\r\n    <h3 class="text-center">Informations sur la photo</h3>\r\n    <h5>Nom du fichier : ' +
+__p += '<div class="detailsMainRegion" style="border:1px solid #C0C0C0;color:#404040;padding:0 10px 10px 20px;margin:10px 0;border-radius:10px;background-color: rgba(240, 240, 240, 1);">\r\n    <h3 class="text-center">Informations sur la photo</h3>\r\n    <h5>Nom du fichier : ' +
 ((__t = ( name )) == null ? '' : __t) +
 '</h5>\r\n    <h5>Date : ' +
 ((__t = ( date )) == null ? '' : __t) +
@@ -66,7 +66,7 @@ __p += '<div class="detailsMainRegion" style="border:1px solid #C0C0C0;color:#40
 ((__t = ( name )) == null ? '' : __t) +
 '" placeholder="Saisir un nouveau nom" name="name" class="form-control" size="30">\r\n        Commentaire :\r\n        <br>\r\n        <textarea id="comment" type="text" value="' +
 ((__t = ( comment )) == null ? '' : __t) +
-'" name="comment" placeholder="Saisir un commentaire" rows="5" class="form-control"></textarea><br>\r\n        <button id ="btn-save" class="btn btn-block btn-lg btn-primary" value="Sauvegarder" type="submit">Sauvegarder</button>\r\n    \r\n</div>\r\n\r\n<!--\r\n    <form method="post" action="{{ url_for(\'editPhoto\') }}">\r\n        Editer le nom : <br>\r\n        <input type="text" value="" placeholder="Saisir un nouveau nom" name="name" class="form-control" size="40">\r\n        Ajouter un commentaire : <br>\r\n        <textarea name="message" placeholder="Saisir un commentaire" rows="5" class="form-control"></textarea><br>\r\n        <input class="btn btn-block btn-lg btn-primary" value="Sauvegarder" type="submit">\r\n    </form>\r\n\r\n{{ url_for(\'details_photo\') }}\r\n-->\r\n';
+'" name="comment" placeholder="Saisir un commentaire" rows="5" class="form-control"></textarea><br>\r\n        <button id ="btn-save" class="btn btn-block btn-lg btn-primary" value="Sauvegarder" type="submit">Sauvegarder</button>\r\n</div>\r\n\r\n<!--\r\n    <form method="post" action="{{ url_for(\'editPhoto\') }}">\r\n        Editer le nom : <br>\r\n        <input type="text" value="" placeholder="Saisir un nouveau nom" name="name" class="form-control" size="40">\r\n        Ajouter un commentaire : <br>\r\n        <textarea name="message" placeholder="Saisir un commentaire" rows="5" class="form-control"></textarea><br>\r\n        <input class="btn btn-block btn-lg btn-primary" value="Sauvegarder" type="submit">\r\n    </form>\r\n\r\n{{ url_for(\'details_photo\') }}\r\n-->\r\n';
 
 }
 return __p
@@ -128,11 +128,7 @@ __p += '<div class="speciesMainRegion" style="border:1px solid #C0C0C0;color:#40
 ((__t = ( authority )) == null ? '' : __t) +
 '</h5>\r\n\t\t<h5>Occurence : ' +
 ((__t = ( frequency )) == null ? '' : __t) +
-'</h5>\r\n\t</div>\r\n\t<br>\r\n\t<div class="species-pictures-gallery">\r\n\t\t<div class="species-picture-1 col-md-6"><img class="img-rounded img-responsive" src="' +
-((__t = ( photo1 )) == null ? '' : __t) +
-'" alt="picture1"/></div>\r\n\t\t<div class="species-picture-2 col-md-6"><img class="img-rounded img-responsive" src="' +
-((__t = ( photo2 )) == null ? '' : __t) +
-'" alt="picture2"/></div>\r\n\t\t<br>\r\n\t</div>\r\n\t<div class="species-biometrics">\r\n\t\t<h4>Biométrie</h4>\r\n\t</div>\r\n\t<div class="species-size">\r\n\t\t<h5>Taille (cm) : ' +
+'</h5>\r\n\t</div>\r\n\t<br>\r\n\t<div class="species-pictures-gallery">\r\n\t\t<div class="species-picture-1 col-md-6"><img class="img-rounded img-responsive" src="" alt="picture1"/></div>\r\n\t\t<div class="species-picture-2 col-md-6"><img class="img-rounded img-responsive" src="" alt="picture2"/></div>\r\n\t\t<br>\r\n\t</div>\r\n\t<div class="species-biometrics">\r\n\t\t<h4>Biométrie</h4>\r\n\t</div>\r\n\t<div class="species-size">\r\n\t\t<h5>Taille (cm) : ' +
 ((__t = ( length )) == null ? '' : __t) +
 '</h5>\r\n\t</div>\r\n\t<div class="species-wingspan">\r\n\t\t<h5>Envergure (cm) : ' +
 ((__t = ( wingspan )) == null ? '' : __t) +
