@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, request, render_template
-# import os
 import json
 import string
 import smtplib
