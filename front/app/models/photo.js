@@ -15,7 +15,7 @@ define([
 	        comment: null,
 	        species: null
 		},
-		urlRoot : '/photos',
+		urlRoot : 'photos',
 /*	    initialize: function(options){
     	}*/
 	});

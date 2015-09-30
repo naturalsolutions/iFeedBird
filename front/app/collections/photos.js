@@ -1,12 +1,13 @@
 define([
 	'backbone',
-	'models/photo'
-], function(Backbone, Photo){
+	'models/photo',
+  'config'
+], function(Backbone, Photo, config){
 	
 	'use strict';
 	
 	return Backbone.Collection.extend({
 		model: Photo,
-    	url: '/photos'
+    	url: config.proxy + 'photos'
 	});
 });

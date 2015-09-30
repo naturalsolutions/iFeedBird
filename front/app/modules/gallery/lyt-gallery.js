@@ -4,7 +4,7 @@ define(['marionette', 'collections/photos'],
 
   return Marionette.LayoutView.extend({
     template: 'app/modules/gallery/tpl-gallery.html',
-    className: 'full-height',
+    className: 'full-height gallery',
 
     ui: {
       'photoList': '#photoList'
@@ -17,8 +17,13 @@ define(['marionette', 'collections/photos'],
     onShow: function(){
       var _this = this;
 
+
       this.collection.fetch({
-          success: function(){
+          success: function(md){
+
+            for (var i = 0; i < md.length; i++) {
+              md.models[i].set({'resized' : 'http://127.0.0.1/iFeedBird/front/photos/bird.jpg'});
+            };
             _this.initCollView();
           },
       });
@@ -31,7 +36,6 @@ define(['marionette', 'collections/photos'],
             tagName: 'li',
             template: 'app/modules/gallery/frame/tpl-frame.html',
             className: 'col-md-3'
-            //col-md-3 col-sm-4 portfolio-item
         });
 
         var StoryCollectionView = Backbone.Marionette.CollectionView.extend({

@@ -1,9 +1,7 @@
 require.config({ 
-	baseUrl: '../static/front/app',
+	baseUrl: './app',
 	paths : {
 
-		'tmp'					: './tmp',
-		
 		'app'					: 'app',
 		'config'				: 'config',
 		'router'				: 'router',

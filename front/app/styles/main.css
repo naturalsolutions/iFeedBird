@@ -9985,7 +9985,7 @@ html,
 body {
   height: 100%;
   overflow: hidden;
-  font-family: 'Exo 2', sans-serif;
+  font-family: Trebuchet MS;
 }
 body {
   background: url(img/bg-home.jpg) center center no-repeat;
@@ -9993,15 +9993,9 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
-footer {
-  height: 150px;
-  width: 100%;
-  background: white;
-  padding: 20px;
-}
 main {
   background: transparent;
-  height: calc(100% - 150px);
+  height: calc(100% - 100px);
   padding-top: 50px;
 }
 .container {
@@ -10079,28 +10073,6 @@ li.list-group-item.validated {
 .clear {
   clear: both;
   float: none;
-}
-/* --------------- */
-body {
-  font-family: Trebuchet MS;
-}
-.col-lg-12 h1 {
-  text-align: center;
-  color: white;
-}
-.row {
-  height: auto;
-  width: auto;
-}
-.div_images {
-  width: 100%;
-}
-.images {
-  box-shadow: 5px 5px 50px #000;
-  background-image: none;
-}
-.portfolio-item img {
-  width: 100%;
 }
 /*==========  base  ==========*/
 .login-page {
@@ -10422,7 +10394,7 @@ body {
   height: 200px;
 }
 header {
-  background: green;
+  background: #449d44;
   z-index: 10;
   color: white;
   position: fixed;
@@ -10460,6 +10432,28 @@ header a#logout {
 }
 header #header-loader svg rect {
   fill: white;
+}
+footer {
+  height: 100px;
+  width: 100%;
+  background: white;
+  padding: 20px;
+}
+footer a.logo {
+  display: block;
+  height: 100%;
+  width: 200px;
+  background: url(img/ns.png) center center no-repeat white;
+  background-size: contain;
+}
+/*----------  modules  ----------*/
+.gallery ul {
+  padding: 0;
+  margin: 0;
+}
+.gallery ul li {
+  list-style: none;
+  margin: 0;
 }
 /*==========  ui  ==========*/
 /* approx.. */

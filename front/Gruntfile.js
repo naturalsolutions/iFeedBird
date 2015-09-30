@@ -95,7 +95,7 @@ module.exports = function(grunt) {
 		fileblocks: {
 			options: {
 				templates: {
-					'js': '<script data-main="./app/main" src="front/${file}"></script>',
+					'js': '<script data-main="./app/main" src="${file}"></script>',
 				},
 				removeFiles : true
 			},

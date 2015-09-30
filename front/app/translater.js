@@ -24,7 +24,7 @@ define(['marionette','config','i18n'], function( Marionette,config) {
 	var translater = new Translater();
 
 	return {
-		getTranslater: function (options) { return/* translater;*/ }
+		getTranslater: function (options) { return translater; }
 	};
 
 });

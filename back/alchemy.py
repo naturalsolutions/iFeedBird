@@ -82,6 +82,6 @@ class Especes(Base):
 
 # ----------------------------------------------
 
-engine = create_engine('sqlite:///back/database/sqlite.db')
+engine = create_engine('sqlite:///database/sqlite.db')
 
 Base.metadata.create_all(engine)

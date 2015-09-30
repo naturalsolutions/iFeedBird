@@ -12,8 +12,10 @@ from sqlalchemy.orm import Session, sessionmaker
 from alchemy import Photos, Base
 from traceback import print_exc
 
+
+
 # PROJECT PATH
-SQLITE_PATH = 'sqlite:///back/database/sqlite.db'
+SQLITE_PATH = 'sqlite:///database/sqlite.db'
 
 # EMAIL SETTINGS
 fromaddr = ''
@@ -22,6 +24,7 @@ username = ''
 password = ''
 
 app = Flask(__name__)
+#app.config['DBPATH'] = True
 
 # -----------------------------------------------------------------------------
 
@@ -214,4 +217,4 @@ def contact():
 # -----------------------------------------------------------------------------
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', debug=True)
+    app.run('127.0.0.1', debug=True)

@@ -1,6 +1,7 @@
 define([
-	'backbone'
-], function(Backbone){
+	'backbone',
+	'config'
+], function(Backbone, config){
 
 	'use strict';
 
@@ -23,7 +24,7 @@ define([
 		
 		
 		initialize: function(options){
-			this.url ='/photos/'+this.id+'/species';
+			this.url = config.proxy + '/photos/'+this.id+'/species';
     	}
 	});
 });
