@@ -3,3 +3,6 @@ front/node_modules/
 front/build/
 
 photos/
+
+front/app/styles/
+npm-debug.log
