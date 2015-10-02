@@ -33,7 +33,6 @@ define(['marionette',
 		},
 
 		details_photo: function(id_){
-			console.log('/details_photo/id');
 		},
 
 		details: function(id_){
