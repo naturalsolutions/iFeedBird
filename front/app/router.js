@@ -1,9 +1,3 @@
-/**
-
-	TODO:
-	- set login as marionette.application
-
-**/
 define(['jquery', 'marionette', 'backbone'],
 	function($, Marionette, Backbone) {
 
@@ -13,9 +7,10 @@ define(['jquery', 'marionette', 'backbone'],
 			'gallery': 'gallery',
 			'about': 'about',
 			'contact': 'contact',
+			'statistics': 'statistics',
+			'details_photo': 'details_photo',
 			'details(/:id)': 'details',
 			'*route(/:page)': 'home',
-			'details_photo': 'details_photo'
 		},
 	});
 });
