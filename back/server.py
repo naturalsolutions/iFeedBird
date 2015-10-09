@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, request, render_template
+import jinja2
 import json
 import string
 import smtplib
@@ -11,8 +12,6 @@ from sqlalchemy import update
 from sqlalchemy.orm import Session, sessionmaker
 from alchemy import Photos, Base
 from traceback import print_exc
-
-
 
 # PROJECT PATH
 SQLITE_PATH = 'sqlite:///database/sqlite.db'
