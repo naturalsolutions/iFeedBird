@@ -3,9 +3,10 @@ define(['marionette',
 	'./modules/gallery/lyt-gallery',
 	'./modules/about/lyt-about',
 	'./modules/contact/lyt-contact',
-	'./modules/focus/lyt-focus'],
+	'./modules/focus/lyt-focus',
+	'./modules/stats/lyt-stats'],
 
-	function( Marionette, LytHome, LytGallery, LytAbout, LytContact, LytFocus){
+	function( Marionette, LytHome, LytGallery, LytAbout, LytContact, LytFocus, LytStats){
 	'use strict';
 	return Marionette.Object.extend({
 
@@ -37,6 +38,10 @@ define(['marionette',
 
 		details: function(id_){
 			this.rgMain.show(new LytFocus({id : id_ }));
+		},
+
+		statistics: function(){
+			this.rgMain.show(new LytStats());
 		}
 	});
 });

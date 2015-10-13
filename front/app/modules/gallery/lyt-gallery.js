@@ -17,13 +17,8 @@ define(['marionette', 'collections/photos'],
     onShow: function(){
       var _this = this;
 
-
       this.collection.fetch({
-          success: function(md){
-
-            for (var i = 0; i < md.length; i++) {
-              md.models[i].set({'resized' : 'http://127.0.0.1/iFeedBird/front/photos/bird.jpg'});
-            };
+          success: function(){
             _this.initCollView();
           },
       });

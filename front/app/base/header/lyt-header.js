@@ -1,11 +1,3 @@
-/**
-
-	TODO:
-	- header class hide : see router.js & app.js
-
-**/
-
-
 define(['marionette'],
 function(Marionette) {
 	'use strict';

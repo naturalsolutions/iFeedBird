@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# modif : limite des prises photo dans le temps
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
@@ -10,12 +9,13 @@ import threading
 import time
 import os
 import sys
-sys.path.append('/home/pi/iFeedBird/back/alchemy.py')
+# sys.path.append('/home/pi/iFeedBird/back/alchemy.py')
+sys.path.append('./back/alchemy.py')
 from alchemy import Photos, Base
 
 SQLITE_PATH = "sqlite:///back/database/sqlite.db"
-PROJECT_PATH = "/home/pi/iFeedBird/"
-PHOTOS_DIRECTORY = "/home/pi/iFeedBird/photos/"
+# PHOTOS_DIRECTORY = "/home/pi/iFeedBird/pictures"
+PHOTOS_DIRECTORY = "./pictures"
 
 # GPIO SETTINGS
 GPIO.setmode(GPIO.BCM)
@@ -50,7 +50,7 @@ def capture():
     heure_capture = strftime("%d-%m-%Y_%H:%M:%S")
     fname = (heure_capture + '.jpg')
     source = PHOTOS_DIRECTORY + fname
-    os.system("raspistill -t 10 -o " + source + " -n -w 1024 -h 768 -q 50")
+    os.system("raspistill -t 10 -o " + source + " -n -w 1024 -h 768 -q 100")
     sqliteThread = threading.Thread(target=insertsqlite(fname, heure_capture))
     sqliteThread.start()
     print('Capture done.')
@@ -73,12 +73,12 @@ def main():
 
             if GPIO.input(PIR):
                 if nb_detection == 0:
-                    endStart = time.time() + 60
+                    endStart = time.time() + 30
                     print(str(nb_detection))
 
                 if nb_detection < 3:
                     if currentTime >= endStart:
-                        endStart = time.time() + 60
+                        endStart = time.time() + 30
                         nb_detection = 0
                         print(str(nb_detection))
 
