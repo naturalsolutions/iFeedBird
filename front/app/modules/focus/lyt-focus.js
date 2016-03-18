@@ -9,7 +9,7 @@ function(Marionette, LytDetails, LytSpecies, Photo, Espece) {
 
   return Marionette.LayoutView.extend({
     template: 'app/modules/focus/tpl-focus.html',
-    className: 'full-height',
+    className: 'full-height photo-detail',
     regions: {
         detailsRegion: "#details",
         speciesRegion: "#species"
@@ -35,7 +35,6 @@ function(Marionette, LytDetails, LytSpecies, Photo, Espece) {
           _this.speciesRegion.show(new LytSpecies({model : species}));
         }
       });
-      //this.speciesRegion.show(new LytSpecies({id : this.id }));
     },
   })   
 });

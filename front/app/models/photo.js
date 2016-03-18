@@ -1,6 +1,8 @@
 define([
-	'backbone'
-], function(Backbone){
+	'backbone',
+	'config'
+], function(Backbone, config){
+
 
 	'use strict';
 
@@ -15,8 +17,13 @@ define([
 	        comment: null,
 	        species: null
 		},
-		urlRoot : 'photos',
-/*	    initialize: function(options){
-    	}*/
+
+		initialize: function(options){
+
+			if( options.id ) {
+				this.url = config.proxy + '/photos/'+this.id+'';
+    	}
+
+    }
 	});
 });

@@ -2,6 +2,7 @@
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand after ripplelink" href="#">
+				<i class="glyphicon glyphicon-home"></i>&nbsp;
 				Home
 			</a>
 			<ul class="nav navbar-nav">
@@ -21,7 +22,7 @@
 		</div>
 		<ul class="nav navbar-nav navbar-right">
 
-			<li id="header-loader" class="hidden">
+			<li id="header-loader" class="">
 				<a>
 					<svg width="50" height="10">
 						<rect x="0" y="0" rx="3" ry="3" width="10" height="10">
@@ -45,9 +46,17 @@
 					</svg>
 				</a>
 			</li>
-			<li>
+			<li class="hidden-xs">
+				<a href="#">
+					<i class="glyphicon glyphicon-user"></i>&nbsp;
+					<sapn id="userName">Bill Evans</sapn>
+				</a>
 			</li>
 			<li>
+				<a id="logout"> 
+					logout&nbsp;
+					<i class="glyphicon glyphicon-log-out"></i>
+				</a>
 			</li>
 		</ul>
 	</div>

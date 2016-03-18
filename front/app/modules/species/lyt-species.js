@@ -9,15 +9,11 @@ function(Marionette, Espece) {
     className: 'full-height',
 
     initialize: function(options){
-     /* this.model = new Espece();
-      this.model.url = '/photos/'+this.id+'/species';
-      
-      this.model.fetch();
-      console.log(this.model);*/
       this.model = options.model;
     },
 
     onShow: function(){
+
       this.render();
     },
   })

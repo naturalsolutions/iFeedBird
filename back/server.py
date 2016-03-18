@@ -118,7 +118,7 @@ def getFicheEspece(photo_id):
 # -----------------------------------------------------------------------------
 
 
-@app.route('/delete/<photo_id>', methods=['DELETE'])
+@app.route('/photos/<photo_id>', methods=['DELETE'])
 def deleteSQLite(photo_id):
     print(photo_id)
     engine = create_engine(SQLITE_PATH)
@@ -214,6 +214,18 @@ def contact():
         message=message)
 
 # -----------------------------------------------------------------------------
+@app.route('/gallery/upload', methods=['POST'])
+def upLoad():
+    print('in upload photos')
+    engine = create_engine(SQLITE_PATH)
+    Base.metadata.bind = engine
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+
+    print(request.files)
+
+    return  json.dumps({'res': True})
+#------------------------------------------------------------------------------
 
 if __name__ == '__main__':
     app.run('127.0.0.1', debug=True)

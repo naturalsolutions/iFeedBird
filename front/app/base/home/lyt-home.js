@@ -4,7 +4,7 @@ function(Marionette) {
 
 	return Marionette.LayoutView.extend({
 		template: 'app/base/home/tpl/tpl-home.html',
-		className: 'home-page ns-full-height',
+		className: 'home-page full-height',
 
 		events: {
 			'click #startCapture' : 'startCapture',

@@ -1,5 +1,5 @@
-define(['marionette', 'collections/photos'],
-  function(Marionette, Photos) {
+define(['marionette', 'collections/photos', './frame/lyt-frame'],
+  function(Marionette, Photos, LytFrame) {
   'use strict';
 
   return Marionette.LayoutView.extend({
@@ -27,15 +27,9 @@ define(['marionette', 'collections/photos'],
     initCollView: function(){
       var _this = this;
 
-        var frameView = Backbone.Marionette.ItemView.extend({
-            tagName: 'li',
-            template: 'app/modules/gallery/frame/tpl-frame.html',
-            className: 'col-md-3'
-        });
-
         var StoryCollectionView = Backbone.Marionette.CollectionView.extend({
-            childView: frameView,
-            tagName: 'ul'
+            childView: LytFrame,
+            className: 'collView',
         });
 
         var storyCollView = new StoryCollectionView({

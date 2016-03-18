@@ -18,11 +18,9 @@ define([
 	        length: null,
 	        red_list_category: null,
 	        distribution: null,
-	        description: null
-	        //photos:null
+	        description: null,
+	        photos:null
 		},
-		
-		
 		initialize: function(options){
 			this.url = config.proxy + '/photos/'+this.id+'/species';
     	}

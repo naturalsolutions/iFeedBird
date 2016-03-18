@@ -4,9 +4,14 @@ define(['marionette',
 	'./modules/about/lyt-about',
 	'./modules/contact/lyt-contact',
 	'./modules/focus/lyt-focus',
-	'./modules/stats/lyt-stats'],
+	'./modules/stats/lyt-stats',
+	'./modules/gallery/upload/lyt-upload',
 
-	function( Marionette, LytHome, LytGallery, LytAbout, LytContact, LytFocus, LytStats){
+	],
+
+	function( Marionette, LytHome, LytGallery,
+	LytAbout, LytContact, LytFocus, LytStats, LytUpload
+	){
 	'use strict';
 	return Marionette.Object.extend({
 
@@ -42,7 +47,12 @@ define(['marionette',
 
 		statistics: function(){
 			this.rgMain.show(new LytStats());
-		}
+		},
+
+		upload: function() {
+			var lyt = new LytUpload();
+			this.rgMain.show(lyt);
+		},
 	});
 });
 

@@ -29,8 +29,7 @@ require.config({
 
 		
 		'i18n'					: '../bower_components/i18n/i18next',
-		'dropzone'					: '../bower_components/dropzone/dist/dropzone-amd-module',
-
+		
 	},
 
 
@@ -69,10 +68,6 @@ require.config({
 		i18n : {
 			deps: ['jquery'],
 			exports : '$'
-		},
-		dropzone: {
-		  deps: ['jquery'],
-		  exports: 'Dropzone'
 		},
 	},
 });

@@ -1,26 +1,18 @@
-define(['jquery','marionette'],
-  function($, Marionette) {
+define(['jquery','marionette','config'],
+  function($, Marionette, config) {
   'use strict';
 
   return Marionette.LayoutView.extend({
-    el: '#my-element',
-    template: 'app/modules/gallery/tpl-frame.html',
-    //template: false,
-    className: 'col-xs-3',
+    template: 'app/modules/gallery/frame/tpl-frame.html',
+    className: 'col-xs-3 no-padding frame',
 
-    ui: {
-            paragraph: 'p',
-            button: '.my-button'
-    },
- 
     events: {
-        //'click @ui.button': 'clickedButton',
         'click #btnDelete': 'deletePhoto',
-        'click #btnViewDetails' : 'viewDetails'
+        'click #btnViewDetails' : 'viewDetails',
+        'click #fileToUpload' : 'upLoad',
     },
 
     initialize: function(options){
-        view.ui.button.trigger('click');
     },
 
     onShow: function(){
@@ -31,21 +23,19 @@ define(['jquery','marionette'],
     },
 
     viewDetails: function(e){
-        var photo_id = $(e.target).data('id');
-        this.rgMain.show(new LytDetails());
+        //this.rgMain.show(new LytDetails());
     },
 
     deletePhoto: function(e){
         var photo_id = $(e.target).data('id');
 
-        $.ajax({
-            type: 'DELETE',
-            url: '/delete/' + photo_id,
-            success: _.bind(function(){
-                this.remove();
-            }, this)
-        })
-    }
+        this.model.urlRoot =  config.proxy +'/photos';
+        this.model.idAttribute = 'ID';
+        var _this = this;
+        this.model.destroy();
+        
+    },
+
 
   });
 

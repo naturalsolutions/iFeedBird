@@ -24,7 +24,7 @@ function(Marionette, Backbone, Lyt_rootview, Router, Controller) {
 		$('#header-loader').removeClass('hidden');
 	});
 	$( document ).ajaxStop(function() {
-		$('#header-loader').addClass('hidden');
+		//$('#header-loader').addClass('hidden');
 	});
 	window.app = app;
 	return app;

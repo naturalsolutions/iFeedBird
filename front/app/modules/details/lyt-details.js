@@ -11,16 +11,10 @@ function(Marionette, Photo) {
       'click #btn-save': 'savePhoto',
     },
     initialize: function(options){
-     /* this.model = new Photo({id : this.id});
-      this.model.fetch();*/
-      /*this.model.url = '/photos/'+this.id;
-      this.model.fetch();*/
-
       this.model = options.model;
     },
 
     onShow: function(){
-      this.render();
     },
 
     savePhoto: function(){

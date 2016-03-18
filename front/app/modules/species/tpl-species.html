@@ -1,4 +1,4 @@
-<div class="speciesMainRegion" style="border:1px solid #C0C0C0;color:#404040;padding:0 10px 10px 20px;margin:10px 0;border-radius:10px;box-shadow:3px 3px 6px 0 #A9A9A9;background-color: rgba(240, 240, 240, 1);">
+<div class="card">
 	<h3 class="text-center">Information sur l'espèce détectée</h3>
 	<div class="species-generalities">
 		<h4>Généralités</h4>
@@ -8,12 +8,20 @@
 		<h5>Authority : <%= authority %></h5>
 		<h5>Occurence : <%= frequency %></h5>
 	</div>
-	<br>
 	<div class="species-pictures-gallery">
-		<div class="species-picture-1 col-md-6"><img class="img-rounded img-responsive" src="" alt="picture1"/></div>
-		<div class="species-picture-2 col-md-6"><img class="img-rounded img-responsive" src="" alt="picture2"/></div>
+		<div class="row-custom clearfix">
+		<div class="species-picture-1 col-md-6"><img class="img-rounded img-responsive" src="./app/styles/img/moineau1.jpg" alt="picture1"/></div>
+		<div class="species-picture-2 col-md-6"><img class="img-rounded img-responsive" src="./app/styles/img/moineau2.jpg" alt="picture2"/></div>
+		</div>
 		<br>
 	</div>
+	
+	<div class="col-xs-12">
+		<img class="img-rounded img-responsive pull-right" width="100px" src="./app/styles/img/eb-logo.png" alt="picture2"/>
+	</div>
+
+
+
 	<div class="species-biometrics">
 		<h4>Biométrie</h4>
 	</div>

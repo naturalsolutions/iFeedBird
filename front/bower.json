@@ -10,6 +10,7 @@
     "backbone.radio": "~0.9.0",
     "animate.css": "https://github.com/daneden/animate.css.git#~3.2.6",
     "requirejs-text": "~2.0.14",
-    "i18n": "https://github.com/jamuhl/i18next.git"
+    "i18n": "https://github.com/jamuhl/i18next.git",
+    "dropzone": "~4.3.0"
   }
 }
